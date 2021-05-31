@@ -1,6 +1,6 @@
 # Server base information
 WEB_SERVER_NAME=web-server
-WEB_SERVER_VERSION=0.1.0-SNAPSHOT
+WEB_SERVER_VERSION=0.1.0
 WEB_SERVER_DEPOT_NAME=lena-web
 
 # oss information for httpd
