@@ -52,7 +52,7 @@ LENA will be released every each quarter. You can get [released files](https://g
 You can find a roadmap of LENA [here](https://github.com/OpenLENA/lena-web/wiki/2021-Roadmap).
 
 ## Community
-[Google Groups](https://groups.google.com/g/lena-oe)
+[Google Groups](https://groups.google.com/g/openlena)
 
 ## License
 LENA Web Server Open Edition is Open Source software released under the Apache 2.0 license.
