@@ -1,0 +1,6 @@
+# /action.yml
+name: 'Compile apache - Amazon Linux 2'
+description: 'add actions'
+runs:
+  using: 'docker'
+  image: Dockerfile

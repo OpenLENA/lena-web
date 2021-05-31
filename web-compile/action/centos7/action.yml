@@ -1,0 +1,6 @@
+# /action.yml
+name: 'Compile apache - Centos 7'
+description: 'add actions'
+runs:
+  using: 'docker'
+  image: Dockerfile

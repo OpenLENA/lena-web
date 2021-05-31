@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<install>
+	<servers>
+	</servers>
+	<modules>
+		<module>
+			<id>lena-ctl</id>
+			<version>${project.version}</version>
+		</module>
+	</modules>
+</install>

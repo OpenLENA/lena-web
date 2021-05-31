@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<release>
+	<date>${build.timestamp}</date>
+	<version>${project.version}</version>
+	<type>lena</type>
+	<depot>
+		<modules>
+			<module>
+				<id>lena-web</id>
+				<version>${project.version}</version>
+			</module>
+		</modules>
+	</depot>
+</release>
