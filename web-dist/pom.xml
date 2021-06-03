@@ -6,7 +6,7 @@
 
     <groupId>io.openlena</groupId>
     <artifactId>web-dist</artifactId>
-    <version>0.1.0</version>
+    <version>0.2.0-SNAPSHOT</version>
 
     <properties>
         <build.timestamp>${maven.build.timestamp}</build.timestamp>
@@ -21,7 +21,7 @@
         <dependency>
             <groupId>io.openlena</groupId>
             <artifactId>lena-ctl</artifactId>
-            <version>0.1.0</version>
+            <version>0.2.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>commons-cli</groupId>
