@@ -121,7 +121,7 @@ install_package() {
 
 	local _package_install_cmd="yum"
 	if `cat /etc/*-release | grep -q "Ubuntu"`; then
-    _package_install_cmd="apt"
+    _package_install_cmd="apt-get"
   fi
 
 	if ! is_package_installed ${_package_name} ; then
