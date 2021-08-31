@@ -142,7 +142,7 @@ install_default_package() {
     _check_packages=${DEFAULT_OS_PACKAGES_24_UBUNTU}
   else
     _check_packages=${DEFAULT_OS_PACKAGES_24}
-	  local _centos_version=`cat /etc/redhat-release |awk '{print $4}' | cut -b1
+	  local _centos_version=`cat /etc/redhat-release |awk '{print $4}' | cut -b1`
     # if centos8 need to enable powertools for install lua-devel....etc...
     if [ "${_centos_version}" = "8" ]; then
       sed -i "s/enabled=0/enabled=1/g" /etc/yum.repos.d/CentOS-Linux-PowerTools.repo
