@@ -80,8 +80,13 @@ check_exit_code(){
 
 is_package_installed() {
 	local _package_name=$1
+	local _package_check_cmd="rpm -qa"
+	if `cat /etc/*-release | grep -q "Ubuntu"`; then
+    _package_check_cmd="dpkg -l"
+  fi
+
 	info Checking package : ${_package_name}
-	if ! rpm -qa | grep ${_package_name}; then
+	if ! ${_package_check_cmd} | grep ${_package_name}; then
 		return ${FALSE_VAL}
 	else
 		return ${TRUE_VAL}
@@ -91,6 +96,10 @@ is_package_installed() {
 is_default_package_installed() {
 	local _web_server_type=$1
 	local _check_packages=${DEFAULT_OS_PACKAGES_24}
+
+	if `cat /etc/*-release | grep -q "Ubuntu"`; then
+    _check_packages=${DEFAULT_OS_PACKAGES_24_UBUNTU}
+  fi
 	
 	for _package_name in ${_check_packages}; do
 		if ! is_package_installed ${_package_name}; then
@@ -104,31 +113,41 @@ is_default_package_installed() {
 install_package() {
 	local _package_name=$1
 	local _runner=`whoami`
-	
+
 	if [ ! ${_runner} = root ]; then
 		info "Package installation is failed. Execute package install script as root user."
 		end_fail
 	fi
-	
+
+	local _package_install_cmd="yum"
+	if `cat /etc/*-release | grep -q "Ubuntu"`; then
+    _package_install_cmd="apt"
+  fi
+
 	if ! is_package_installed ${_package_name} ; then
-		yum install -y ${_package_name}
+		${_package_install_cmd} install -y ${_package_name}
 		check_exit_code $? "Package installation is failed. Please check the environment."
 	else
 		info "${_package_name} package is already installed."
 	fi
-	
+
 	return ${TRUE_VAL}
 }
 
 install_default_package() {
 	local _web_server_type=$1
-	local _check_packages=${DEFAULT_OS_PACKAGES_24}
-	local _centos_version=`cat /etc/redhat-release |awk '{print $4}' | cut -b1`
+	local _check_packages
 
-  # if centos8 need to enable powertools for install lua-devel....etc...
-	if [ "${_centos_version}" = "8" ]; then
-   	sed -i "s/enabled=0/enabled=1/g" /etc/yum.repos.d/CentOS-Linux-PowerTools.repo
-	fi
+	if `cat /etc/*-release | grep -q "Ubuntu"`; then
+    _check_packages=${DEFAULT_OS_PACKAGES_24_UBUNTU}
+  else
+    _check_packages=${DEFAULT_OS_PACKAGES_24}
+	  local _centos_version=`cat /etc/redhat-release |awk '{print $4}' | cut -b1
+    # if centos8 need to enable powertools for install lua-devel....etc...
+    if [ "${_centos_version}" = "8" ]; then
+      sed -i "s/enabled=0/enabled=1/g" /etc/yum.repos.d/CentOS-Linux-PowerTools.repo
+    fi
+  fi
 	
 	if is_default_package_installed ${_web_server_type}; then
 		return ${TRUE_VAL}
