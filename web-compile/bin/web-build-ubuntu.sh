@@ -5,6 +5,7 @@ cp -P /bin/sh /bin/sh_back
 ln -sf /bin/bash /bin/sh
 
 # run web server compile
+apt-get update
 ./web-build.sh
 
 # restore  /bin/sh symbolic link
