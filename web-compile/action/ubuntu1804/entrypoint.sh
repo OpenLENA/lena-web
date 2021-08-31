@@ -6,9 +6,10 @@ echo "file list"
 chmod -R 755 ./web-compile
 
 # clean build result
-./web-compile/bin/web-clean.sh
+cd ./web-compile/bin
+./web-clean.sh
 
 # build apache httpd
-./web-compile/bin/web-build-ubuntu.sh
+./web-build-ubuntu.sh
 
 echo "action test"
