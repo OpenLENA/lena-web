@@ -17,7 +17,7 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
       - name: Compile Amazon Linux 2
-        uses: ./web-compile/action/centos8
+        uses: ./web-compile/action/amazonlinux2
       - name: maven-settings-xml-action
         uses: whelk-io/maven-settings-xml-action@v14
         with:
