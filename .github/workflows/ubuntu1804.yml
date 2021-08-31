@@ -24,7 +24,7 @@ jobs:
           repositories: '[{ "id": "github", "url": "https://maven.pkg.github.com/openlena/*" }]'
           servers: ${{secrets.GH_MVN_REPO_USER_INFO}}
       - name: Build with Maven
-        run: mvn -B package --file web-dist/pom.xml -Dcompile.os.name=amazonlinux2
+        run: mvn -B package --file web-dist/pom.xml -Dcompile.os.name=ubuntu1804
       - name: check result
         run: ls -al web-dist/target/lena-work
       - uses: shallwefootball/s3-upload-action@master
