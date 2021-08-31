@@ -39,6 +39,13 @@ export EXT_MODULE_DEFINES=
 if [ ! -r ${ENGN_HOME}/modules/mod_mpm_event.so ]; then
 	export MPM_TYPE=MPM_WORKER
 fi
+## ROOT SWITCH USER / GROUP
+export ROOT_SWITCH_USER=nobody
+if `cat /etc/*-release | grep -q "Ubuntu"`; then
+  export ROOT_SWITCH_GROUP=nogroup
+else
+  export ROOT_SWITCH_GROUP=nobody
+fi
 
 ## LIBPATH
 export LD_LIBRARY_PATH="${ENGN_HOME}/lib:${LD_LIBRARY_PATH}"
