@@ -1,3 +1,3 @@
 #!/bin/bash
 
-exec ${LENA_HOME}/bin/start.sh
+exec ${LENA_HOME}/servers/${SERVER_NAME}/start.sh

@@ -2,9 +2,6 @@
 
 # set
 INSTALL_FILE_PATH=`ls ${LENA_HOME}/*.tar.gz`
-JAVA_HOME=/usr/lib/jvm/java
-SERVER_NAME=webServer
-SERVICE_PORT=7180
 
 # install jdk
 yum install -y java-1.8.0-openjdk-devel.x86_64

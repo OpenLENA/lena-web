@@ -1,6 +1,10 @@
 FROM docker.io/rockylinux/rockylinux:8.4
 
 ENV LENA_HOME /usr/local/lena
+ENV JAVA_HOME /usr/lib/jvm/java
+ENV SERVER_NAME webServer
+ENV SERVICE_PORT 7180
+
 # create LENA HOME
 RUN mkdir -p /usr/local/lena
 # copy LENA install files
