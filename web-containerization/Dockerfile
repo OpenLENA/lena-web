@@ -3,7 +3,8 @@ ARG FROM_IMAGE=MustInputBuildArg
 FROM docker.io/${FROM_IMAGE}
 
 ENV LENA_HOME /usr/local/lena
-ENV JAVA_HOME /usr/lib/jvm/java
+#ARG JDK_HOME=/usr/lib/jvm/java
+#ENV JAVA_HOME ${JDK_HOME}
 ENV SERVER_NAME webServer
 ENV SERVICE_PORT 7180
 

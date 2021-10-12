@@ -4,7 +4,13 @@
 INSTALL_FILE_PATH=`ls ${LENA_HOME}/*.tar.gz`
 
 # install jdk
-yum install -y java-1.8.0-openjdk-devel.x86_64
+if [ -f /etc/redhat-release ]; then
+  yum install -y java-1.8.0-openjdk-devel.x86_64
+  JAVA_HOME=/usr/lib/jvm/java
+else
+  apt-get install -y openjdk-8-jdk
+  JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64
+fi
 
 # Extract install file
 tar -zxvf ${INSTALL_FILE_PATH} -C ${LENA_HOME} --strip-components=1
@@ -15,14 +21,14 @@ rm -rf ${INSTALL_FILE_PATH}
 # Install lena-web
 ### create argument text file
 INSTALL_ARG_FILE=${LENA_HOME}/arg.txt
-echo ${JAVA_HOME} >> ${INSTALL_ARG_FILE} # java home
-echo ${SERVER_NAME} >> ${INSTALL_ARG_FILE} # server name
-echo ${SERVICE_PORT} >> ${INSTALL_ARG_FILE} # service port
-echo "" >> ${INSTALL_ARG_FILE} # run user - use default, don't need to input
-echo "" >> ${INSTALL_ARG_FILE} # apache engine path - use default, don't need to input
-echo "" >> ${INSTALL_ARG_FILE} # install root path - use default, don't need to input
-echo "" >> ${INSTALL_ARG_FILE} # log home - use default, don't need to input
-echo "" >> ${INSTALL_ARG_FILE} # document root path - use default, don't need to input
+echo ${JAVA_HOME} >> ${INSTALL_ARG_FILE}      # java home
+echo ${SERVER_NAME} >> ${INSTALL_ARG_FILE}    # server name
+echo ${SERVICE_PORT} >> ${INSTALL_ARG_FILE}   # service port
+echo "" >> ${INSTALL_ARG_FILE}                # run user - use default, don't need to input
+echo "" >> ${INSTALL_ARG_FILE}                # apache engine path - use default, don't need to input
+echo "" >> ${INSTALL_ARG_FILE}                # install root path - use default, don't need to input
+echo "" >> ${INSTALL_ARG_FILE}                # log home - use default, don't need to input
+echo "" >> ${INSTALL_ARG_FILE}                # document root path - use default, don't need to input
 
 ### install
 /bin/bash ${LENA_HOME}/bin/lenactl.sh create lena-web < ${INSTALL_ARG_FILE}
