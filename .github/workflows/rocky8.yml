@@ -56,6 +56,6 @@ jobs:
           file: ./web-containerization/Dockerfile
           push: true
           build-args: |
-            FROM_IMAGE:"rockylinux/rockylinux:8.4"
+            FROM_IMAGE=rockylinux/rockylinux:8.4
           tags: |
             ghcr.io/${{ steps.repository.outputs.lowercase }}:rocky8
