@@ -1,4 +1,4 @@
-FROM docker.io/rockylinux/rockylinux:8.4
+FROM docker.io/${FROM_IMAGE}
 
 ENV LENA_HOME /usr/local/lena
 ENV JAVA_HOME /usr/lib/jvm/java
