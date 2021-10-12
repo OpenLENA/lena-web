@@ -4,12 +4,12 @@
 INSTALL_FILE_PATH=`ls ${LENA_HOME}/*.tar.gz`
 
 # install jdk
-if [ -f /etc/redhat-release ]; then
-  yum install -y java-1.8.0-openjdk-devel.x86_64
-  JAVA_HOME=/usr/lib/jvm/java
-else
+if `cat /etc/*-release | grep -q "Ubuntu"`; then
   apt-get install -y openjdk-8-jdk
   JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64
+else
+  yum install -y java-1.8.0-openjdk-devel.x86_64
+  JAVA_HOME=/usr/lib/jvm/java
 fi
 
 # Extract install file
