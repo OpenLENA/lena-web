@@ -14,7 +14,7 @@ else
 fi
 
 # Extract install file
-tar -zxvf ${INSTALL_FILE_PATH} -C ${LENA_HOME} --strip-components=1
+tar -zxf ${INSTALL_FILE_PATH} -C ${LENA_HOME} --strip-components=1
 
 # Clear install file
 rm -rf ${INSTALL_FILE_PATH}
