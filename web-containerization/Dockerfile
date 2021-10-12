@@ -1,4 +1,5 @@
-ARG FROM_IMAGE=centos:7
+# FROM IMAGE will be changed by docker build argument
+ARG FROM_IMAGE=MustInputBuildArg
 FROM docker.io/${FROM_IMAGE}
 
 ENV LENA_HOME /usr/local/lena
