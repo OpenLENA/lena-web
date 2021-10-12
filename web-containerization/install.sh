@@ -5,6 +5,7 @@ INSTALL_FILE_PATH=`ls ${LENA_HOME}/*.tar.gz`
 
 # install jdk
 if `cat /etc/*-release | grep -q "Ubuntu"`; then
+  apt-get update
   apt-get install -y openjdk-8-jdk
   JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64
 else
@@ -32,6 +33,7 @@ echo "" >> ${INSTALL_ARG_FILE}                # log home - use default, don't ne
 echo "" >> ${INSTALL_ARG_FILE}                # document root path - use default, don't need to input
 
 ### install
+cat ${INSTALL_ARG_FILE}
 /bin/bash ${LENA_HOME}/bin/lenactl.sh create lena-web < ${INSTALL_ARG_FILE}
 
 # create image build info
