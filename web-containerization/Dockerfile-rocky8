@@ -1,0 +1,6 @@
+FROM docker.io/rockylinux/rockylinux:8.4
+
+# create LENA HOME
+RUN mkdir -p /usr/local/lena
+# copy LENA install files
+COPY web-dist/target/lena-work/*.tar.gz /usr/local/lena
