@@ -1,0 +1,38 @@
+name: Build Rocky 8
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+      - name: Compile Rocky
+        uses: ./web-compile/action/rocky8
+      - name: maven-settings-xml-action
+        uses: whelk-io/maven-settings-xml-action@v14
+        with:
+          repositories: '[{ "id": "github", "url": "https://maven.pkg.github.com/openlena/*" }]'
+          servers: ${{secrets.GH_MVN_REPO_USER_INFO}}
+      - name: Build with Maven
+        run: mvn -B package --file web-dist/pom.xml -Dcompile.os.name=rocky8
+      - name: check result
+        run: ls -al web-dist/target/lena-work
+      - uses: shallwefootball/s3-upload-action@master
+        name: Upload S3
+        id: S3
+        with:
+          aws_key_id: ${{ secrets.AWS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
+          aws_bucket: ${{ secrets.AWS_BUCKET }}
+          source_dir: 'web-dist/target/lena-work'
+          destination_dir: 'openlena/web'
