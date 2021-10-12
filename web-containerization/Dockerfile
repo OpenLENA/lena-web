@@ -1,3 +1,4 @@
+ARG FROM_IMAGE=centos:7
 FROM docker.io/${FROM_IMAGE}
 
 ENV LENA_HOME /usr/local/lena
