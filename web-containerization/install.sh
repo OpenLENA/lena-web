@@ -8,6 +8,7 @@ if `cat /etc/*-release | grep -q "Ubuntu"`; then
   apt-get install -y openjdk-8-jdk
   JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64
 else
+  yum install -y tar
   yum install -y java-1.8.0-openjdk-devel.x86_64
   JAVA_HOME=/usr/lib/jvm/java
 fi
