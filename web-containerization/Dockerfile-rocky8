@@ -4,7 +4,7 @@ ENV LENA_HOME /usr/local/lena
 # create LENA HOME
 RUN mkdir -p /usr/local/lena
 # copy LENA install files
-COPY web-dist/target/lena-work/*.tar.gz ./install.sh ./entrypoint.sh ${LENA_ROOT}
+COPY web-dist/target/lena-work/*.tar.gz web-containerization/install.sh web-containerization/entrypoint.sh ${LENA_ROOT}
 
 # Insall LENA
 RUN cd ${LENA_HOME} \
