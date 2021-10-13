@@ -1,6 +1,8 @@
 name: Build Amazon Linux 2
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ master ]
   pull_request:
     branches: [ master ]
 jobs:
@@ -14,14 +16,8 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
-#      - name: Compile Amazon Linux 2
-#        uses: ./web-compile/action/amazonlinux2
-      - name: check path
-        run: ls -al
-      - id: get-version
-        uses: JActions/maven-version@v1.0.0
-        with:
-          pom: ./web-dist/pom.xml
+      - name: Compile Amazon Linux 2
+        uses: ./web-compile/action/amazonlinux2
       - name: maven-settings-xml-action
         uses: whelk-io/maven-settings-xml-action@v14
         with:
@@ -29,6 +25,12 @@ jobs:
           servers: ${{secrets.GH_MVN_REPO_USER_INFO}}
       - name: Build with Maven
         run: mvn -B package --file web-dist/pom.xml -Dcompile.os.name=amazonlinux2
+      - name: Bump Version
+        id: get-version
+        uses: nnichols/maven-version-bump-action@v4
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          pom-path: web-dist
       - name: check result
         run: ls -al web-dist/target/lena-work
       - uses: shallwefootball/s3-upload-action@master

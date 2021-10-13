@@ -1,6 +1,8 @@
 name: Build Rocky 8
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ master ]
   pull_request:
     branches: [ master ]
 jobs:
@@ -8,12 +10,16 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
+      # check out source
       - uses: actions/checkout@v2
+      # setup jdk 11
       - name: Set up JDK 11
         uses: actions/setup-java@v2
         with:
           java-version: '11'
           distribution: 'adopt'
+
+      # compile apache http server
       - name: Compile Rocky
         uses: ./web-compile/action/rocky8
       - name: maven-settings-xml-action
@@ -21,14 +27,17 @@ jobs:
         with:
           repositories: '[{ "id": "github", "url": "https://maven.pkg.github.com/openlena/*" }]'
           servers: ${{secrets.GH_MVN_REPO_USER_INFO}}
+      # packaging project
       - name: Build with Maven
         run: mvn -B package --file web-dist/pom.xml -Dcompile.os.name=rocky8
-      - id: get-version
-        uses: JActions/maven-version@v1.0.0
+      # get project version
+      - name: Bump Version
+        id: get-version
+        uses: nnichols/maven-version-bump-action@v4
         with:
-          pom: ./web-dist/pom.xml
-      - name: check result
-        run: ls -al web-dist/target/lena-work
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          pom-path: web-dist
+      # upload install file to AWS S3
       - uses: shallwefootball/s3-upload-action@master
         name: Upload S3
         id: S3
@@ -38,19 +47,23 @@ jobs:
           aws_bucket: ${{ secrets.AWS_BUCKET }}
           source_dir: 'web-dist/target/lena-work'
           destination_dir: 'openlena/web'
+      # setup Container Image Build module
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
+      # Setup repository access info
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v1
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+      # get repository name
       - id: repository
         name: change github.repository string to lowercase
         uses: ASzc/change-string-case-action@v1
         with:
           string: ${{ github.repository }}
+      # build docker container image and push to repository
       - name: Build and push
         uses: docker/build-push-action@v2
         with:
