@@ -16,8 +16,12 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
-      - name: Compile Amazon Linux 2
-        uses: ./web-compile/action/amazonlinux2
+#      - name: Compile Amazon Linux 2
+#        uses: ./web-compile/action/amazonlinux2
+      - id: get-version
+          uses: JActions/maven-version@v1.0.0
+          with:
+            pom: ./pom.xml
       - name: maven-settings-xml-action
         uses: whelk-io/maven-settings-xml-action@v14
         with:
