@@ -1,8 +1,6 @@
 name: Build Amazon Linux 2
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
-  push:
-    branches: [ master ]
   pull_request:
     branches: [ master ]
 jobs:
@@ -23,7 +21,7 @@ jobs:
       - id: get-version
         uses: JActions/maven-version@v1.0.0
         with:
-          pom: ./pom.xml
+          pom: ./web-dist/pom.xml
       - name: maven-settings-xml-action
         uses: whelk-io/maven-settings-xml-action@v14
         with:
