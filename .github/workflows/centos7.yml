@@ -1,8 +1,6 @@
 name: Build Centos 7
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
-  push:
-    branches: [ ]
   pull_request:
     branches: [ master ]
 jobs:

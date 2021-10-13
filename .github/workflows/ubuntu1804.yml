@@ -1,8 +1,6 @@
 name: Build Ubuntu 18.04
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
-  push:
-    branches: [ ]
   pull_request:
     branches: [ master ]
 jobs:
