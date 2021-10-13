@@ -25,6 +25,10 @@ jobs:
           servers: ${{secrets.GH_MVN_REPO_USER_INFO}}
       - name: Build with Maven
         run: mvn -B package --file web-dist/pom.xml -Dcompile.os.name=centos8
+      - id: get-version
+        uses: JActions/maven-version@v1.0.0
+        with:
+          pom: ./web-dist/pom.xml
       - name: check result
         run: ls -al web-dist/target/lena-work
       - uses: shallwefootball/s3-upload-action@master
@@ -58,4 +62,4 @@ jobs:
           build-args: |
             FROM_IMAGE=centos:8
           tags: |
-            ghcr.io/${{ steps.repository.outputs.lowercase }}:centos8
+            ghcr.io/${{ steps.repository.outputs.lowercase }}:${{ steps.get-version.outputs.version }}_centos8
