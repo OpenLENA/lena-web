@@ -26,7 +26,7 @@ jobs:
         uses: nnichols/maven-version-bump-action@v4
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          pom-path: web-dist/pom.xml
+          pom-path: web-dist
 
       - name: Print Version
         run: "echo 'New Version: ${{steps.bump.outputs.version}}'"
