@@ -1,13 +1,12 @@
 name: Build Artifact & Container
 on:
-  # Triggers the workflow on push or pull request events but only for the main branch
   push:
     branches: [ CI-process ]
   pull_request:
     branches: [ master ]
 jobs:
   amazonlinux2:
-    name: Build
+    name: Build ${{ github.job }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -26,41 +25,36 @@ jobs:
       - name: Build with Maven
         run: mvn -B package --file web-dist/pom.xml -Dcompile.os.name=${{ github.job }}
       - name: Bump Version
+        if: github.event_name == 'push'
         id: get-version
         uses: nnichols/maven-version-bump-action@v4
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           pom-path: web-dist
-      - name: check result
-        run: ls -al web-dist/target/lena-work
       - name: Upload install file
+        if: github.event_name == 'push'
         uses: actions/upload-artifact@v2
         with:
           name: ${{ github.job }}
           path: web-dist/target/lena-work/
-#      - uses: shallwefootball/s3-upload-action@master
-#        name: Upload S3
-#        id: S3
-#        with:
-#          aws_key_id: ${{ secrets.AWS_KEY_ID }}
-#          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
-#          aws_bucket: ${{ secrets.AWS_BUCKET }}
-#          source_dir: 'web-dist/target/lena-work'
-#          destination_dir: 'openlena/web'
       - name: Set up Docker Buildx
+        if: github.event_name == 'push'
         uses: docker/setup-buildx-action@v1
       - name: Login to GitHub Container Registry
+        if: github.event_name == 'push'
         uses: docker/login-action@v1
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - id: repository
+        if: github.event_name == 'push'
         name: change github.repository string to lowercase
         uses: ASzc/change-string-case-action@v1
         with:
           string: ${{ github.repository }}
       - name: Build and push
+        if: github.event_name == 'push'
         uses: docker/build-push-action@v2
         with:
           context: .
@@ -71,7 +65,7 @@ jobs:
           tags: |
             ghcr.io/${{ steps.repository.outputs.lowercase }}:${{ steps.get-version.outputs.version }}_${{ github.job }}
   centos7:
-    name: Build
+    name: Build ${{ github.job }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -90,41 +84,36 @@ jobs:
       - name: Build with Maven
         run: mvn -B package --file web-dist/pom.xml -Dcompile.os.name=${{ github.job }}
       - name: Bump Version
+        if: github.event_name == 'push'
         id: get-version
         uses: nnichols/maven-version-bump-action@v4
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           pom-path: web-dist
-      - name: check result
-        run: ls -al web-dist/target/lena-work
       - name: Upload install file
+        if: github.event_name == 'push'
         uses: actions/upload-artifact@v2
         with:
           name: ${{ github.job }}
           path: web-dist/target/lena-work/
-      #      - uses: shallwefootball/s3-upload-action@master
-      #        name: Upload S3
-      #        id: S3
-      #        with:
-      #          aws_key_id: ${{ secrets.AWS_KEY_ID }}
-      #          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
-      #          aws_bucket: ${{ secrets.AWS_BUCKET }}
-      #          source_dir: 'web-dist/target/lena-work'
-      #          destination_dir: 'openlena/web'
       - name: Set up Docker Buildx
+        if: github.event_name == 'push'
         uses: docker/setup-buildx-action@v1
       - name: Login to GitHub Container Registry
+        if: github.event_name == 'push'
         uses: docker/login-action@v1
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - id: repository
+        if: github.event_name == 'push'
         name: change github.repository string to lowercase
         uses: ASzc/change-string-case-action@v1
         with:
           string: ${{ github.repository }}
       - name: Build and push
+        if: github.event_name == 'push'
         uses: docker/build-push-action@v2
         with:
           context: .
@@ -135,7 +124,7 @@ jobs:
           tags: |
             ghcr.io/${{ steps.repository.outputs.lowercase }}:${{ steps.get-version.outputs.version }}_${{ github.job }}
   centos8:
-    name: Build
+    name: Build ${{ github.job }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -154,41 +143,36 @@ jobs:
       - name: Build with Maven
         run: mvn -B package --file web-dist/pom.xml -Dcompile.os.name=${{ github.job }}
       - name: Bump Version
+        if: github.event_name == 'push'
         id: get-version
         uses: nnichols/maven-version-bump-action@v4
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           pom-path: web-dist
-      - name: check result
-        run: ls -al web-dist/target/lena-work
       - name: Upload install file
+        if: github.event_name == 'push'
         uses: actions/upload-artifact@v2
         with:
           name: ${{ github.job }}
           path: web-dist/target/lena-work/
-      #      - uses: shallwefootball/s3-upload-action@master
-      #        name: Upload S3
-      #        id: S3
-      #        with:
-      #          aws_key_id: ${{ secrets.AWS_KEY_ID }}
-      #          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
-      #          aws_bucket: ${{ secrets.AWS_BUCKET }}
-      #          source_dir: 'web-dist/target/lena-work'
-      #          destination_dir: 'openlena/web'
       - name: Set up Docker Buildx
+        if: github.event_name == 'push'
         uses: docker/setup-buildx-action@v1
       - name: Login to GitHub Container Registry
+        if: github.event_name == 'push'
         uses: docker/login-action@v1
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - id: repository
+        if: github.event_name == 'push'
         name: change github.repository string to lowercase
         uses: ASzc/change-string-case-action@v1
         with:
           string: ${{ github.repository }}
       - name: Build and push
+        if: github.event_name == 'push'
         uses: docker/build-push-action@v2
         with:
           context: .
@@ -199,7 +183,7 @@ jobs:
           tags: |
             ghcr.io/${{ steps.repository.outputs.lowercase }}:${{ steps.get-version.outputs.version }}_${{ github.job }}
   rocky8:
-    name: Build
+    name: Build ${{ github.job }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -218,41 +202,36 @@ jobs:
       - name: Build with Maven
         run: mvn -B package --file web-dist/pom.xml -Dcompile.os.name=${{ github.job }}
       - name: Bump Version
+        if: github.event_name == 'push'
         id: get-version
         uses: nnichols/maven-version-bump-action@v4
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           pom-path: web-dist
-      - name: check result
-        run: ls -al web-dist/target/lena-work
       - name: Upload install file
+        if: github.event_name == 'push'
         uses: actions/upload-artifact@v2
         with:
           name: ${{ github.job }}
           path: web-dist/target/lena-work/
-      #      - uses: shallwefootball/s3-upload-action@master
-      #        name: Upload S3
-      #        id: S3
-      #        with:
-      #          aws_key_id: ${{ secrets.AWS_KEY_ID }}
-      #          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
-      #          aws_bucket: ${{ secrets.AWS_BUCKET }}
-      #          source_dir: 'web-dist/target/lena-work'
-      #          destination_dir: 'openlena/web'
       - name: Set up Docker Buildx
+        if: github.event_name == 'push'
         uses: docker/setup-buildx-action@v1
       - name: Login to GitHub Container Registry
+        if: github.event_name == 'push'
         uses: docker/login-action@v1
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - id: repository
+        if: github.event_name == 'push'
         name: change github.repository string to lowercase
         uses: ASzc/change-string-case-action@v1
         with:
           string: ${{ github.repository }}
       - name: Build and push
+        if: github.event_name == 'push'
         uses: docker/build-push-action@v2
         with:
           context: .
@@ -263,7 +242,7 @@ jobs:
           tags: |
             ghcr.io/${{ steps.repository.outputs.lowercase }}:${{ steps.get-version.outputs.version }}_${{ github.job }}
   ubuntu1804:
-    name: Build
+    name: Build ${{ github.job }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -282,41 +261,36 @@ jobs:
       - name: Build with Maven
         run: mvn -B package --file web-dist/pom.xml -Dcompile.os.name=${{ github.job }}
       - name: Bump Version
+        if: github.event_name == 'push'
         id: get-version
         uses: nnichols/maven-version-bump-action@v4
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           pom-path: web-dist
-      - name: check result
-        run: ls -al web-dist/target/lena-work
       - name: Upload install file
+        if: github.event_name == 'push'
         uses: actions/upload-artifact@v2
         with:
           name: ${{ github.job }}
           path: web-dist/target/lena-work/
-      #      - uses: shallwefootball/s3-upload-action@master
-      #        name: Upload S3
-      #        id: S3
-      #        with:
-      #          aws_key_id: ${{ secrets.AWS_KEY_ID }}
-      #          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
-      #          aws_bucket: ${{ secrets.AWS_BUCKET }}
-      #          source_dir: 'web-dist/target/lena-work'
-      #          destination_dir: 'openlena/web'
       - name: Set up Docker Buildx
+        if: github.event_name == 'push'
         uses: docker/setup-buildx-action@v1
       - name: Login to GitHub Container Registry
+        if: github.event_name == 'push'
         uses: docker/login-action@v1
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - id: repository
+        if: github.event_name == 'push'
         name: change github.repository string to lowercase
         uses: ASzc/change-string-case-action@v1
         with:
           string: ${{ github.repository }}
       - name: Build and push
+        if: github.event_name == 'push'
         uses: docker/build-push-action@v2
         with:
           context: .
