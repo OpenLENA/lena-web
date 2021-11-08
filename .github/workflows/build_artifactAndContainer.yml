@@ -17,7 +17,7 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
       - name: Compile Web
-        uses: ./web-compile/action/${{ github.job }}
+        uses: ./web-compile/action/amazonlinux2
       - name: maven-settings-xml-action
         uses: whelk-io/maven-settings-xml-action@v14
         with:
@@ -81,7 +81,7 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
       - name: Compile Web
-        uses: ./web-compile/action/${{ github.job }}
+        uses: ./web-compile/action/centos7
       - name: maven-settings-xml-action
         uses: whelk-io/maven-settings-xml-action@v14
         with:
@@ -145,7 +145,7 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
       - name: Compile Web
-        uses: ./web-compile/action/${{ github.job }}
+        uses: ./web-compile/action/centos8
       - name: maven-settings-xml-action
         uses: whelk-io/maven-settings-xml-action@v14
         with:
@@ -209,7 +209,7 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
       - name: Compile Web
-        uses: ./web-compile/action/${{ github.job }}
+        uses: ./web-compile/action/rocky8
       - name: maven-settings-xml-action
         uses: whelk-io/maven-settings-xml-action@v14
         with:
@@ -273,7 +273,7 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
       - name: Compile Web
-        uses: ./web-compile/action/${{ github.job }}
+        uses: ./web-compile/action/ubuntu1804
       - name: maven-settings-xml-action
         uses: whelk-io/maven-settings-xml-action@v14
         with:
