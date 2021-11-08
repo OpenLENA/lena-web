@@ -6,7 +6,7 @@ on:
     branches: [ master ]
 jobs:
   amazonlinux2:
-    name: Build ${{ github.job }}
+    name: ${{ github.job }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -65,7 +65,7 @@ jobs:
           tags: |
             ghcr.io/${{ steps.repository.outputs.lowercase }}:${{ steps.get-version.outputs.version }}_${{ github.job }}
   centos7:
-    name: Build ${{ github.job }}
+    name: ${{ github.job }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -124,7 +124,7 @@ jobs:
           tags: |
             ghcr.io/${{ steps.repository.outputs.lowercase }}:${{ steps.get-version.outputs.version }}_${{ github.job }}
   centos8:
-    name: Build ${{ github.job }}
+    name: ${{ github.job }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -183,7 +183,7 @@ jobs:
           tags: |
             ghcr.io/${{ steps.repository.outputs.lowercase }}:${{ steps.get-version.outputs.version }}_${{ github.job }}
   rocky8:
-    name: Build ${{ github.job }}
+    name: ${{ github.job }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -242,7 +242,7 @@ jobs:
           tags: |
             ghcr.io/${{ steps.repository.outputs.lowercase }}:${{ steps.get-version.outputs.version }}_${{ github.job }}
   ubuntu1804:
-    name: Build ${{ github.job }}
+    name: ${{ github.job }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
