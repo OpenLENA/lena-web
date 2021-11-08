@@ -2,7 +2,7 @@ name: Build Amazon Linux 2
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches: [ master ]
+    branches: [ CI-process ]
   pull_request:
     branches: [ master ]
 jobs:
@@ -33,15 +33,20 @@ jobs:
           pom-path: web-dist
       - name: check result
         run: ls -al web-dist/target/lena-work
-      - uses: shallwefootball/s3-upload-action@master
-        name: Upload S3
-        id: S3
+      - name: Upload install file
+        uses: actions/upload-artifact@v2
         with:
-          aws_key_id: ${{ secrets.AWS_KEY_ID }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
-          aws_bucket: ${{ secrets.AWS_BUCKET }}
-          source_dir: 'web-dist/target/lena-work'
-          destination_dir: 'openlena/web'
+          name: amazonlinux2
+          path: web-dist/target/lena-work/
+#      - uses: shallwefootball/s3-upload-action@master
+#        name: Upload S3
+#        id: S3
+#        with:
+#          aws_key_id: ${{ secrets.AWS_KEY_ID }}
+#          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
+#          aws_bucket: ${{ secrets.AWS_BUCKET }}
+#          source_dir: 'web-dist/target/lena-work'
+#          destination_dir: 'openlena/web'
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
       - name: Login to GitHub Container Registry
