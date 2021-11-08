@@ -1,11 +1,7 @@
 
 
 # <img src="docs/images/readme_lena_web_head.png" width="800">  
-[![Build Centos 7](https://github.com/OpenLENA/lena-web/actions/workflows/centos7.yml/badge.svg)](https://github.com/OpenLENA/lena-web/actions/workflows/centos7.yml) 
-[![Build Centos 8](https://github.com/OpenLENA/lena-web/actions/workflows/centos8.yml/badge.svg)](https://github.com/OpenLENA/lena-web/actions/workflows/centos8.yml) 
-[![Build Amazon Linux 2](https://github.com/OpenLENA/lena-web/actions/workflows/amazonlinux2.yml/badge.svg)](https://github.com/OpenLENA/lena-web/actions/workflows/amazonlinux2.yml) 
-[![Build Rocky 8](https://github.com/OpenLENA/lena-web/actions/workflows/rocky8.yml/badge.svg)](https://github.com/OpenLENA/lena-web/actions/workflows/rocky8.yml) 
-[![Build Ubuntu 18.04](https://github.com/OpenLENA/lena-web/actions/workflows/ubuntu1804.yml/badge.svg)](https://github.com/OpenLENA/lena-web/actions/workflows/ubuntu1804.yml)
+[![Build Artifact & Container](https://github.com/OpenLENA/lena-web/actions/workflows/push_build.yml/badge.svg)](https://github.com/OpenLENA/lena-web/actions/workflows/push_build.yml)
 
 
 This is the home of the LENA Web Server.
