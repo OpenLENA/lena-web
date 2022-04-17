@@ -4,8 +4,8 @@ WEB_SERVER_VERSION=0.2.0-SNAPSHOT
 WEB_SERVER_DEPOT_NAME=lena-web
 
 # oss information for httpd
-HTTPD_VERSION=2.4.51
-HTTPD_FILE_NAME=httpd-2.4.51.tar.gz
+HTTPD_VERSION=2.4.53
+HTTPD_FILE_NAME=httpd-2.4.53.tar.gz
 
 # oss information for tomcat-connectors
 TOMCAT_CONNECTORS_DEPOT_NAME=tomcat-connectors
