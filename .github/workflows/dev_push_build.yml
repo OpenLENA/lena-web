@@ -56,17 +56,18 @@ jobs:
           push: false
           build-args: |
             FROM_IMAGE=amazonlinux:2
-          tags: |
-            ghcr.io/${{ steps.repository.outputs.lowercase }}:${{ steps.get-version.outputs.version }}_${{ github.job }}
+          tags: ${{ steps.repository.outputs.lowercase }}:${{ steps.get-version.outputs.version }}_${{ github.job }}
       - name: Docker Run Action
         id: dockerRunAction
         uses: addnab/docker-run-action@v3
         with:
-          image: ghcr.io/${{ steps.repository.outputs.lowercase }}:${{ steps.get-version.outputs.version }}_${{ github.job }}
+          image: ${{ steps.repository.outputs.lowercase }}:${{ steps.get-version.outputs.version }}_${{ github.job }}
           shell: bash
           run: |
             echo "test"
-            echo '::set-output name=SELECTED_COLOR::green'
+            echo '::set-output name=SELECTED_COLOR::${SERVER_NAME}'
+            pwd
+            ls -al
             curl -v localhost:7180
             echo "curl result : $?"
       - name: Check output
