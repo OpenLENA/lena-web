@@ -70,12 +70,12 @@ jobs:
             ${LENA_HOME}/servers/${SERVER_NAME}/start.sh
             ${LENA_HOME}/servers/${SERVER_NAME}/ps.sh
             curl localhost:7180
-            if [ '$?' -eq '0'] ; then
+            if [ '$?' -eq '0' ] ; then
               RESULT=SUCCESS
             else
               RESULT=FAIL
             fi
-            echo '::set-output name=RESULT::${RESULT}'
+            echo '::set-output name=RESULT::'${RESULT}
             echo "========================="
       - name: Check output
         run: echo "The selected color is ${{ steps.dockerRunAction.outputs.RESULT }}"
