@@ -88,3 +88,9 @@ jobs:
             echo "========================="
       - name: Check output
         run: echo "Test Result [ ${{ steps.dockerRunAction.outputs.RESULT }} ]"
+      - name: A/B Check
+        if: ${{ steps.dockerRunAction.outputs.RESULT != FAIL }}
+        uses: actions/github-script@v3
+        with:
+          script: |
+            core.setFailed('Command Failed [ curl localhost:7180 ]')
