@@ -12,3 +12,12 @@ jobs:
         run: echo "datetime=$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_ENV
       - name: Echo current date
         run: echo ${{ env.datetime }}
+      - name: Delete image
+        uses: bots-house/ghcr-delete-image-action@v1.0.0
+        with:
+          # NOTE: at now only orgs is supported
+          owner: openlena
+          name: lena-web
+          # NOTE: using Personal Access Token
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: 0.2.0-SNAPSHOT_centos7_220420083838
