@@ -57,7 +57,7 @@ jobs:
         with:
           context: .
           file: ./web-containerization/Dockerfile_dev
-          push: false
+          push: true
           build-args: |
             FROM_IMAGE=amazonlinux:2
           tags: |
