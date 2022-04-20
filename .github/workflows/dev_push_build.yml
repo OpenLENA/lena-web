@@ -75,8 +75,8 @@ jobs:
             echo LENA_HOME : ${LENA_HOME}
             curl -v localhost:7180
             echo "curl result : $?"
-            sh ${LENA_HOME}/webServer/ps.sh
-            netstat -anp | grep 7180
+            sh ${LENA_HOME}/servers/${SERVER_NAME}/ps.sh
+            ps -ef
             echo "========================="
       - name: Check output
         run: echo "The selected color is ${{ steps.dockerRunAction.outputs.SELECTED_COLOR }}"
