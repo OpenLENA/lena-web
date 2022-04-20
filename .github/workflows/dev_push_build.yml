@@ -48,7 +48,7 @@ jobs:
         with:
           string: ${{ github.repository }}
       - name: Set current date as env variable
-        run: echo "datetime::$(date +'%y%m%d%H%M%S')" >> $GITHUB_ENV
+        run: echo "datetime=$(date +'%y%m%d%H%M%S')" >> $GITHUB_ENV
       - name: Echo current date
         run: echo ${{ env.datetime }}
       - name: Build and test
