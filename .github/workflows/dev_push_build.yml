@@ -4,7 +4,7 @@ on:
     branches:
       - 'dev/**'
 jobs:
-  amazonlinux2:
+  centos7:
     name: ${{ github.job }}
     runs-on: ubuntu-latest
     steps:
@@ -15,7 +15,7 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
       - name: Compile Web
-        uses: ./web-compile/action/amazonlinux2
+        uses: ./web-compile/action/centos7
       - name: maven-settings-xml-action
         uses: whelk-io/maven-settings-xml-action@v14
         with:
@@ -49,17 +49,14 @@ jobs:
           string: ${{ github.repository }}
       - name: Set current date as env variable
         run: echo "datetime=$(date +'%y%m%d%H%M%S')" >> $GITHUB_ENV
-      - name: Echo current date
-        run: echo ${{ env.datetime }}
-      - name: Build and test
-        id: buildAndTest
+      - name: Build and push
         uses: docker/build-push-action@v2
         with:
           context: .
           file: ./web-containerization/Dockerfile_dev
           push: true
           build-args: |
-            FROM_IMAGE=amazonlinux:2
+            FROM_IMAGE=centos:7
           tags: |
             ghcr.io/${{ steps.repository.outputs.lowercase }}:${{ steps.get-version.outputs.version }}_${{ github.job }}_${{ env.datetime }}
       - name: Docker Run Action
