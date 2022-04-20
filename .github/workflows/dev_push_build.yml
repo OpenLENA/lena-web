@@ -1,4 +1,4 @@
-name: [Dev] Pull Request Build Action
+name: '[Dev] Pull Request Build Action'
 on:
   push:
     branches:
