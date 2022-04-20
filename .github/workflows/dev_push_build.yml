@@ -48,7 +48,7 @@ jobs:
         with:
           string: ${{ github.repository }}
       - name: Set current date as env variable
-        run: echo "NOW::$(date +'%Y%m%d%H:%M:%S')" >> $GITHUB_ENV
+        run: echo "NOW::$(date +'%y%m%d%H%M%S')" >> $GITHUB_ENV
       - name: Build and test
         id: buildAndTest
         uses: docker/build-push-action@v2
