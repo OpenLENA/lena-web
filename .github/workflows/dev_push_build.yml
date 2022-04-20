@@ -69,11 +69,14 @@ jobs:
           image: ghcr.io/${{ steps.repository.outputs.lowercase }}:${{ steps.get-version.outputs.version }}_${{ github.job }}_${{ env.datetime }}
           shell: bash
           run: |
-            echo "test"
+            echo "========================="
             echo '::set-output name=SELECTED_COLOR::green'
             pwd
             echo LENA_HOME : ${LENA_HOME}
             curl -v localhost:7180
             echo "curl result : $?"
+            sh ${LENA_HOME}/webServer/ps.sh
+            netstat -anp | grep 7180
+            echo "========================="
       - name: Check output
         run: echo "The selected color is ${{ steps.dockerRunAction.outputs.SELECTED_COLOR }}"
