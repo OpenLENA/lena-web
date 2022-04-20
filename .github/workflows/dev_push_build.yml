@@ -48,9 +48,9 @@ jobs:
         with:
           string: ${{ github.repository }}
       - name: Set current date as env variable
-        run: echo "NOW::$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_ENV
+        run: echo "datetime::$(date +'%y%m%d%H%M%S')" >> $GITHUB_ENV
       - name: Echo current date
-        run: echo $NOW
+        run: echo ${{ env.datetime }}
       - name: Build and test
         id: buildAndTest
         uses: docker/build-push-action@v2
@@ -61,12 +61,12 @@ jobs:
           build-args: |
             FROM_IMAGE=amazonlinux:2
           tags: |
-            ghcr.io/${{ steps.repository.outputs.lowercase }}:${{ steps.get-version.outputs.version }}_${{ github.job }}_${$NOW}
+            ghcr.io/${{ steps.repository.outputs.lowercase }}:${{ steps.get-version.outputs.version }}_${{ github.job }}_${{ env.datetime }}
       - name: Docker Run Action
         id: dockerRunAction
         uses: addnab/docker-run-action@v3
         with:
-          image: ghcr.io/${{ steps.repository.outputs.lowercase }}:${{ steps.get-version.outputs.version }}_${{ github.job }}_${$NOW}
+          image: ghcr.io/${{ steps.repository.outputs.lowercase }}:${{ steps.get-version.outputs.version }}_${{ github.job }}_${{ env.datetime }}
           shell: bash
           run: |
             echo "test"
