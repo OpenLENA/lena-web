@@ -48,6 +48,7 @@ jobs:
         with:
           string: ${{ github.repository }}
       - name: Build and test
+        id: buildAndTest
         uses: docker/build-push-action@v2
         with:
           context: .
@@ -57,3 +58,5 @@ jobs:
             FROM_IMAGE=amazonlinux:2
           tags: |
             ghcr.io/${{ steps.repository.outputs.lowercase }}:${{ steps.get-version.outputs.version }}_${{ github.job }}
+      - name: Check output
+        run: echo "The selected color is ${{ steps.buildAndTest.outputs.SELECTED_COLOR }}"
