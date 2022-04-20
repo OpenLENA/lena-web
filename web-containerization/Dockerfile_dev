@@ -19,9 +19,5 @@ RUN cd ${LENA_HOME} \
 	&& ${LENA_HOME}/install.sh \
 	&& rm -f ${LENA_HOME}/install.sh
 
-# Test Web Server
-RUN ${LENA_HOME}/servers/${SERVER_NAME}/start.sh \
-    && echo '::set-output name=SELECTED_COLOR::green'
-
 WORKDIR $LENA_HOME
 CMD ["./entrypoint.sh"]
