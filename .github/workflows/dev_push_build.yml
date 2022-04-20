@@ -57,6 +57,8 @@ jobs:
           build-args: |
             FROM_IMAGE=amazonlinux:2
           tags: ${{ steps.repository.outputs.lowercase }}:${{ steps.get-version.outputs.version }}_${{ github.job }}
+      - name: check image
+        run: docker images
       - name: Docker Run Action
         id: dockerRunAction
         uses: addnab/docker-run-action@v3
