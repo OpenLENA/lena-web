@@ -47,6 +47,8 @@ jobs:
         uses: ASzc/change-string-case-action@v1
         with:
           string: ${{ github.repository }}
+      - name: Set current date as env variable
+        run: echo "NOW::$(date +'%Y%m%d%H:%M:%S')" >> $GITHUB_ENV
       - name: Build and test
         id: buildAndTest
         uses: docker/build-push-action@v2
@@ -56,20 +58,19 @@ jobs:
           push: false
           build-args: |
             FROM_IMAGE=amazonlinux:2
-          tags: ${{ steps.repository.outputs.lowercase }}:${{ steps.get-version.outputs.version }}_${{ github.job }}
-      - name: check image
-        run: docker images
+          tags: |
+            ghcr.io/${{ steps.repository.outputs.lowercase }}:${{ steps.get-version.outputs.version }}_${{ github.job }}_${$NOW}
       - name: Docker Run Action
         id: dockerRunAction
         uses: addnab/docker-run-action@v3
         with:
-          image: ${{ steps.repository.outputs.lowercase }}:${{ steps.get-version.outputs.version }}_${{ github.job }}
+          image: ghcr.io/${{ steps.repository.outputs.lowercase }}:${{ steps.get-version.outputs.version }}_${{ github.job }}_${$NOW}
           shell: bash
           run: |
             echo "test"
-            echo '::set-output name=SELECTED_COLOR::${SERVER_NAME}'
+            echo '::set-output name=SELECTED_COLOR::green'
             pwd
-            ls -al
+            echo LENA_HOME : ${LENA_HOME}
             curl -v localhost:7180
             echo "curl result : $?"
       - name: Check output
