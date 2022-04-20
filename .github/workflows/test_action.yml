@@ -1,0 +1,14 @@
+name: '[Dev] test action'
+on:
+  push:
+    branches:
+      - 'dev/**'
+jobs:
+  amazonlinux2:
+    name: ${{ github.job }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set current date as env variable
+        run: echo "NOW::$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_ENV
+      - name: Echo current date
+        run: echo $NOW
