@@ -12,7 +12,7 @@ jobs:
         uses: bots-house/ghcr-delete-image-action@v1.0.1
         with:
           # NOTE: at now only orgs is supported
-          owner: ${{ github.actor }}
+          owner: openlena
           name: ${{ github.repository }}
           # NOTE: using Personal Access Token
           token: ${{ secrets.GH_PAT_FULL_ACCESS_AUTH }}
