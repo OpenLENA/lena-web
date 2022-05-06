@@ -16,4 +16,4 @@ jobs:
           name: lena-web
           # NOTE: using Personal Access Token
           token: ${{ secrets.GITHUB_TOKEN }}
-          tag: 0.2.0-SNAPSHOT_centos7_220420145106
+          tag: "0.2.0-SNAPSHOT_centos7_220420145106"
