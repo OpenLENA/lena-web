@@ -76,9 +76,7 @@ jobs:
           shell: bash
           run: |
             echo "========================="
-            ${LENA_HOME}/servers/${SERVER_NAME}/start.sh
             ${LENA_HOME}/servers/${SERVER_NAME}/ps.sh
-            curl localhost:7180
             if [ "$?" -eq "0" ] ; then
               RESULT=SUCCESS
             else
