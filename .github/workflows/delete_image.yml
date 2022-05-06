@@ -12,8 +12,8 @@ jobs:
         uses: bots-house/ghcr-delete-image-action@v1.0.1
         with:
           # NOTE: at now only orgs is supported
-          owner: openlena
-          name: lena-web
+          owner: ${{ github.actor }}
+          name: ${{ github.repository }}
           # NOTE: using Personal Access Token
           token: ${{ secrets.GH_PAT_FULL_ACCESS_AUTH }}
-          tag: "0.2.0-SNAPSHOT_centos7_220420145106"
+          tag: 0.2.0-SNAPSHOT_centos7_220506062809
