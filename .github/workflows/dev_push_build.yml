@@ -76,6 +76,7 @@ jobs:
           shell: bash
           run: |
             echo "========================="
+            ${LENA_HOME}/servers/${SERVER_NAME}/start.sh
             ${LENA_HOME}/servers/${SERVER_NAME}/ps.sh
             if [ "$?" -eq "0" ] ; then
               RESULT=SUCCESS
@@ -90,7 +91,7 @@ jobs:
         uses: actions/github-script@v3
         with:
           script: |
-            core.setFailed('Command Failed [ curl localhost:7180 ]')
+            core.setFailed('Command Failed [ ps.sh ]')
       # Delete test image
       - name: Delete image
         uses: bots-house/ghcr-delete-image-action@v1.0.1
