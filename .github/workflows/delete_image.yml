@@ -1,4 +1,4 @@
-name: '[Dev] Pull Request Build Action'
+name: 'Delete Image'
 on:
   push:
     branches:
