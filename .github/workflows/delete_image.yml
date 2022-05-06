@@ -13,7 +13,7 @@ jobs:
         with:
           # NOTE: at now only orgs is supported
           owner: openlena
-          name: ${{ github.repository }}
+          name: lena-web
           # NOTE: using Personal Access Token
           token: ${{ secrets.GH_PAT_FULL_ACCESS_AUTH }}
           tag: 0.2.0-SNAPSHOT_centos7_220506062809
