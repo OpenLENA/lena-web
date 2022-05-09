@@ -8,7 +8,13 @@ if `cat /etc/*-release | grep -q "Ubuntu"`; then
   apt-get update
   apt-get install -y openjdk-8-jdk
   JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64
+elif `cat /etc/*-release | grep -q "Amazon Linux 2"`; then
+  yum update -y
+  yum install -y tar procps hostname
+  yum install -y java-1.8.0-openjdk-devel.x86_64
+  JAVA_HOME=/usr/lib/jvm/java
 else
+  yum update -y
   yum install -y tar
   yum install -y java-1.8.0-openjdk-devel.x86_64
   JAVA_HOME=/usr/lib/jvm/java

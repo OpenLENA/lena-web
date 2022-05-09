@@ -1,8 +1,11 @@
-name: '[ Merge Master ] Build LENA Web'
+name: '[ Dev / PR ] Build LENA Web'
 on:
-  push:
+  pull_request:
     branches:
       - 'master'
+  push:
+    branches:
+      - 'dev/**'
 jobs:
   centos7:
     name: ${{ github.job }}
@@ -66,13 +69,13 @@ jobs:
           build-args: |
             FROM_IMAGE=centos:7
           tags: |
-            ghcr.io/${{ steps.repository.outputs.lowercase }}:${{ steps.get-version.outputs.version }}_${{ github.job }}
+            ghcr.io/${{ steps.repository.outputs.lowercase }}:${{ steps.get-version.outputs.version }}_${{ github.job }}_${{ env.datetime }}
       # Run conatiner for simple test
       - name: Docker Run Action
         id: dockerRunAction
         uses: addnab/docker-run-action@v3
         with:
-          image: ghcr.io/${{ steps.repository.outputs.lowercase }}:${{ steps.get-version.outputs.version }}_${{ github.job }}
+          image: ghcr.io/${{ steps.repository.outputs.lowercase }}:${{ steps.get-version.outputs.version }}_${{ github.job }}_${{ env.datetime }}
           shell: bash
           run: |
             echo "========================="
@@ -92,6 +95,15 @@ jobs:
         with:
           script: |
             core.setFailed('Command Failed [ ps.sh ]')
+      # Delete test image
+      - name: Delete image
+        if: always()
+        uses: bots-house/ghcr-delete-image-action@v1.0.1
+        with:
+          owner: openlena
+          name: lena-web
+          token: ${{ secrets.GH_PAT_FULL_ACCESS_AUTH }}
+          tag: ${{ steps.get-version.outputs.version }}_${{ github.job }}_${{ env.datetime }}
   rocky8:
     name: ${{ github.job }}
     runs-on: ubuntu-latest
@@ -154,13 +166,13 @@ jobs:
           build-args: |
             FROM_IMAGE=rockylinux/rockylinux:8.4
           tags: |
-            ghcr.io/${{ steps.repository.outputs.lowercase }}:${{ steps.get-version.outputs.version }}_${{ github.job }}
+            ghcr.io/${{ steps.repository.outputs.lowercase }}:${{ steps.get-version.outputs.version }}_${{ github.job }}_${{ env.datetime }}
       # Run conatiner for simple test
       - name: Docker Run Action
         id: dockerRunAction
         uses: addnab/docker-run-action@v3
         with:
-          image: ghcr.io/${{ steps.repository.outputs.lowercase }}:${{ steps.get-version.outputs.version }}_${{ github.job }}
+          image: ghcr.io/${{ steps.repository.outputs.lowercase }}:${{ steps.get-version.outputs.version }}_${{ github.job }}_${{ env.datetime }}
           shell: bash
           run: |
             echo "========================="
@@ -180,6 +192,15 @@ jobs:
         with:
           script: |
             core.setFailed('Command Failed [ ps.sh ]')
+      # Delete test image
+      - name: Delete image
+        if: always()
+        uses: bots-house/ghcr-delete-image-action@v1.0.1
+        with:
+          owner: openlena
+          name: lena-web
+          token: ${{ secrets.GH_PAT_FULL_ACCESS_AUTH }}
+          tag: ${{ steps.get-version.outputs.version }}_${{ github.job }}_${{ env.datetime }}
   ubuntu1804:
     name: ${{ github.job }}
     runs-on: ubuntu-latest
@@ -242,13 +263,13 @@ jobs:
           build-args: |
             FROM_IMAGE=ubuntu:18.04
           tags: |
-            ghcr.io/${{ steps.repository.outputs.lowercase }}:${{ steps.get-version.outputs.version }}_${{ github.job }}
+            ghcr.io/${{ steps.repository.outputs.lowercase }}:${{ steps.get-version.outputs.version }}_${{ github.job }}_${{ env.datetime }}
       # Run conatiner for simple test
       - name: Docker Run Action
         id: dockerRunAction
         uses: addnab/docker-run-action@v3
         with:
-          image: ghcr.io/${{ steps.repository.outputs.lowercase }}:${{ steps.get-version.outputs.version }}_${{ github.job }}
+          image: ghcr.io/${{ steps.repository.outputs.lowercase }}:${{ steps.get-version.outputs.version }}_${{ github.job }}_${{ env.datetime }}
           shell: bash
           run: |
             echo "========================="
@@ -268,6 +289,15 @@ jobs:
         with:
           script: |
             core.setFailed('Command Failed [ ps.sh ]')
+      # Delete test image
+      - name: Delete image
+        if: always()
+        uses: bots-house/ghcr-delete-image-action@v1.0.1
+        with:
+          owner: openlena
+          name: lena-web
+          token: ${{ secrets.GH_PAT_FULL_ACCESS_AUTH }}
+          tag: ${{ steps.get-version.outputs.version }}_${{ github.job }}_${{ env.datetime }}
   amazonlinux2:
     name: ${{ github.job }}
     runs-on: ubuntu-latest
@@ -330,13 +360,13 @@ jobs:
           build-args: |
             FROM_IMAGE=amazonlinux:2
           tags: |
-            ghcr.io/${{ steps.repository.outputs.lowercase }}:${{ steps.get-version.outputs.version }}_${{ github.job }}
+            ghcr.io/${{ steps.repository.outputs.lowercase }}:${{ steps.get-version.outputs.version }}_${{ github.job }}_${{ env.datetime }}
       # Run conatiner for simple test
       - name: Docker Run Action
         id: dockerRunAction
         uses: addnab/docker-run-action@v3
         with:
-          image: ghcr.io/${{ steps.repository.outputs.lowercase }}:${{ steps.get-version.outputs.version }}_${{ github.job }}
+          image: ghcr.io/${{ steps.repository.outputs.lowercase }}:${{ steps.get-version.outputs.version }}_${{ github.job }}_${{ env.datetime }}
           shell: bash
           run: |
             echo "========================="
@@ -356,4 +386,13 @@ jobs:
         with:
           script: |
             core.setFailed('Command Failed [ ps.sh ]')
+      # Delete test image
+      - name: Delete image
+        if: always()
+        uses: bots-house/ghcr-delete-image-action@v1.0.1
+        with:
+          owner: openlena
+          name: lena-web
+          token: ${{ secrets.GH_PAT_FULL_ACCESS_AUTH }}
+          tag: ${{ steps.get-version.outputs.version }}_${{ github.job }}_${{ env.datetime }}
 
