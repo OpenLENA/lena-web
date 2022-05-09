@@ -94,6 +94,7 @@ jobs:
             core.setFailed('Command Failed [ ps.sh ]')
       # Delete test image
       - name: Delete image
+        if: always()
         uses: bots-house/ghcr-delete-image-action@v1.0.1
         with:
           owner: openlena
@@ -190,6 +191,7 @@ jobs:
             core.setFailed('Command Failed [ ps.sh ]')
       # Delete test image
       - name: Delete image
+        if: always()
         uses: bots-house/ghcr-delete-image-action@v1.0.1
         with:
           owner: openlena
@@ -286,6 +288,7 @@ jobs:
             core.setFailed('Command Failed [ ps.sh ]')
       # Delete test image
       - name: Delete image
+        if: always()
         uses: bots-house/ghcr-delete-image-action@v1.0.1
         with:
           owner: openlena
@@ -375,13 +378,14 @@ jobs:
             echo "========================="
       # Check server status
       - name: PS script Result Check
-        if: ${{ steps.dockerRunAction.outputs.RESULT != 'SUCCESS' }}
+        if: ${{ steps.dockerRunAction.outputs.RESULT != 'SUCCESS1' }}
         uses: actions/github-script@v3
         with:
           script: |
             core.setFailed('Command Failed [ ps.sh ]')
       # Delete test image
       - name: Delete image
+        if: always()
         uses: bots-house/ghcr-delete-image-action@v1.0.1
         with:
           owner: openlena
