@@ -1,4 +1,4 @@
-name: '[ Dev / PR ] Build LENA Web'
+name: '[ Merge Master ] Build LENA Web'
 on:
   push:
     branches:
