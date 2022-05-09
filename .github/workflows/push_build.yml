@@ -1,71 +1,22 @@
-name: Build Artifact & Container
+name: '[ Dev / PR ] Build LENA Web'
 on:
   push:
-    branches: [ master ]
+    branches:
+      - 'master'
 jobs:
-  amazonlinux2:
-    name: ${{ github.job }}
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Set up JDK 11
-        uses: actions/setup-java@v2
-        with:
-          java-version: '11'
-          distribution: 'adopt'
-      - name: Compile Web
-        uses: ./web-compile/action/amazonlinux2
-      - name: maven-settings-xml-action
-        uses: whelk-io/maven-settings-xml-action@v14
-        with:
-          repositories: '[{ "id": "github", "url": "https://maven.pkg.github.com/openlena/*" }]'
-          servers: ${{secrets.GH_MVN_REPO_USER_INFO}}
-      - name: Build with Maven
-        run: mvn -B package --file web-dist/pom.xml -Dcompile.os.name=${{ github.job }}
-      - name: Bump Version
-        id: get-version
-        uses: nnichols/maven-version-bump-action@v4
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          pom-path: web-dist
-      - name: Upload install file
-        uses: actions/upload-artifact@v2
-        with:
-          name: ${{ github.job }}
-          path: web-dist/target/lena-work/
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@v1
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-      - id: repository
-        name: change github.repository string to lowercase
-        uses: ASzc/change-string-case-action@v1
-        with:
-          string: ${{ github.repository }}
-      - name: Build and push
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: ./web-containerization/Dockerfile
-          push: true
-          build-args: |
-            FROM_IMAGE=amazonlinux:2
-          tags: |
-            ghcr.io/${{ steps.repository.outputs.lowercase }}:${{ steps.get-version.outputs.version }}_${{ github.job }}
   centos7:
     name: ${{ github.job }}
     runs-on: ubuntu-latest
     steps:
+      # check out repo
       - uses: actions/checkout@v2
+      # setup JDK
       - name: Set up JDK 11
         uses: actions/setup-java@v2
         with:
           java-version: '11'
           distribution: 'adopt'
+      # Compile Web
       - name: Compile Web
         uses: ./web-compile/action/centos7
       - name: maven-settings-xml-action
@@ -73,19 +24,23 @@ jobs:
         with:
           repositories: '[{ "id": "github", "url": "https://maven.pkg.github.com/openlena/*" }]'
           servers: ${{secrets.GH_MVN_REPO_USER_INFO}}
-      - name: Build with Maven
+      # Build Install file
+      - name: Build Open LENA Web install file
         run: mvn -B package --file web-dist/pom.xml -Dcompile.os.name=${{ github.job }}
+      # Get Version from maven pom.xml
       - name: Bump Version
         id: get-version
         uses: nnichols/maven-version-bump-action@v4
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           pom-path: web-dist
-      - name: Upload install file
+      # Upload install file to Github Artifact
+      - name: Upload install file to Github Artifact
         uses: actions/upload-artifact@v2
         with:
           name: ${{ github.job }}
           path: web-dist/target/lena-work/
+      # Set up Docker
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
       - name: Login to GitHub Container Registry
@@ -99,7 +54,10 @@ jobs:
         uses: ASzc/change-string-case-action@v1
         with:
           string: ${{ github.repository }}
-      - name: Build and push
+      - name: Set current date as env variable
+        run: echo "datetime=$(date +'%y%m%d%H%M%S')" >> $GITHUB_ENV
+      # Build And Push to ghcr
+      - name: Build and push container
         uses: docker/build-push-action@v2
         with:
           context: .
@@ -109,69 +67,44 @@ jobs:
             FROM_IMAGE=centos:7
           tags: |
             ghcr.io/${{ steps.repository.outputs.lowercase }}:${{ steps.get-version.outputs.version }}_${{ github.job }}
-  centos8:
-    name: ${{ github.job }}
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Set up JDK 11
-        uses: actions/setup-java@v2
+      # Run conatiner for simple test
+      - name: Docker Run Action
+        id: dockerRunAction
+        uses: addnab/docker-run-action@v3
         with:
-          java-version: '11'
-          distribution: 'adopt'
-      - name: Compile Web
-        uses: ./web-compile/action/centos8
-      - name: maven-settings-xml-action
-        uses: whelk-io/maven-settings-xml-action@v14
+          image: ghcr.io/${{ steps.repository.outputs.lowercase }}:${{ steps.get-version.outputs.version }}_${{ github.job }}
+          shell: bash
+          run: |
+            echo "========================="
+            ${LENA_HOME}/servers/${SERVER_NAME}/start.sh
+            ${LENA_HOME}/servers/${SERVER_NAME}/ps.sh
+            if [ "$?" -eq "0" ] ; then
+              RESULT=SUCCESS
+            else
+              RESULT=FAIL
+            fi
+            echo '::set-output name=RESULT::'${RESULT}
+            echo "========================="
+      # Check server status
+      - name: PS script Result Check
+        if: ${{ steps.dockerRunAction.outputs.RESULT != 'SUCCESS' }}
+        uses: actions/github-script@v3
         with:
-          repositories: '[{ "id": "github", "url": "https://maven.pkg.github.com/openlena/*" }]'
-          servers: ${{secrets.GH_MVN_REPO_USER_INFO}}
-      - name: Build with Maven
-        run: mvn -B package --file web-dist/pom.xml -Dcompile.os.name=${{ github.job }}
-      - name: Bump Version
-        id: get-version
-        uses: nnichols/maven-version-bump-action@v4
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          pom-path: web-dist
-      - name: Upload install file
-        uses: actions/upload-artifact@v2
-        with:
-          name: ${{ github.job }}
-          path: web-dist/target/lena-work/
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@v1
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-      - id: repository
-        name: change github.repository string to lowercase
-        uses: ASzc/change-string-case-action@v1
-        with:
-          string: ${{ github.repository }}
-      - name: Build and push
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: ./web-containerization/Dockerfile
-          push: true
-          build-args: |
-            FROM_IMAGE=centos:8
-          tags: |
-            ghcr.io/${{ steps.repository.outputs.lowercase }}:${{ steps.get-version.outputs.version }}_${{ github.job }}
+          script: |
+            core.setFailed('Command Failed [ ps.sh ]')
   rocky8:
     name: ${{ github.job }}
     runs-on: ubuntu-latest
     steps:
+      # check out repo
       - uses: actions/checkout@v2
+      # setup JDK
       - name: Set up JDK 11
         uses: actions/setup-java@v2
         with:
           java-version: '11'
           distribution: 'adopt'
+      # Compile Web
       - name: Compile Web
         uses: ./web-compile/action/rocky8
       - name: maven-settings-xml-action
@@ -179,19 +112,23 @@ jobs:
         with:
           repositories: '[{ "id": "github", "url": "https://maven.pkg.github.com/openlena/*" }]'
           servers: ${{secrets.GH_MVN_REPO_USER_INFO}}
-      - name: Build with Maven
+      # Build Install file
+      - name: Build Open LENA Web install file
         run: mvn -B package --file web-dist/pom.xml -Dcompile.os.name=${{ github.job }}
+      # Get Version from maven pom.xml
       - name: Bump Version
         id: get-version
         uses: nnichols/maven-version-bump-action@v4
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           pom-path: web-dist
-      - name: Upload install file
+      # Upload install file to Github Artifact
+      - name: Upload install file to Github Artifact
         uses: actions/upload-artifact@v2
         with:
           name: ${{ github.job }}
           path: web-dist/target/lena-work/
+      # Set up Docker
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
       - name: Login to GitHub Container Registry
@@ -205,7 +142,10 @@ jobs:
         uses: ASzc/change-string-case-action@v1
         with:
           string: ${{ github.repository }}
-      - name: Build and push
+      - name: Set current date as env variable
+        run: echo "datetime=$(date +'%y%m%d%H%M%S')" >> $GITHUB_ENV
+      # Build And Push to ghcr
+      - name: Build and push container
         uses: docker/build-push-action@v2
         with:
           context: .
@@ -215,16 +155,44 @@ jobs:
             FROM_IMAGE=rockylinux/rockylinux:8.4
           tags: |
             ghcr.io/${{ steps.repository.outputs.lowercase }}:${{ steps.get-version.outputs.version }}_${{ github.job }}
+      # Run conatiner for simple test
+      - name: Docker Run Action
+        id: dockerRunAction
+        uses: addnab/docker-run-action@v3
+        with:
+          image: ghcr.io/${{ steps.repository.outputs.lowercase }}:${{ steps.get-version.outputs.version }}_${{ github.job }}
+          shell: bash
+          run: |
+            echo "========================="
+            ${LENA_HOME}/servers/${SERVER_NAME}/start.sh
+            ${LENA_HOME}/servers/${SERVER_NAME}/ps.sh
+            if [ "$?" -eq "0" ] ; then
+              RESULT=SUCCESS
+            else
+              RESULT=FAIL
+            fi
+            echo '::set-output name=RESULT::'${RESULT}
+            echo "========================="
+      # Check server status
+      - name: PS script Result Check
+        if: ${{ steps.dockerRunAction.outputs.RESULT != 'SUCCESS' }}
+        uses: actions/github-script@v3
+        with:
+          script: |
+            core.setFailed('Command Failed [ ps.sh ]')
   ubuntu1804:
     name: ${{ github.job }}
     runs-on: ubuntu-latest
     steps:
+      # check out repo
       - uses: actions/checkout@v2
+      # setup JDK
       - name: Set up JDK 11
         uses: actions/setup-java@v2
         with:
           java-version: '11'
           distribution: 'adopt'
+      # Compile Web
       - name: Compile Web
         uses: ./web-compile/action/ubuntu1804
       - name: maven-settings-xml-action
@@ -232,19 +200,23 @@ jobs:
         with:
           repositories: '[{ "id": "github", "url": "https://maven.pkg.github.com/openlena/*" }]'
           servers: ${{secrets.GH_MVN_REPO_USER_INFO}}
-      - name: Build with Maven
+      # Build Install file
+      - name: Build Open LENA Web install file
         run: mvn -B package --file web-dist/pom.xml -Dcompile.os.name=${{ github.job }}
+      # Get Version from maven pom.xml
       - name: Bump Version
         id: get-version
         uses: nnichols/maven-version-bump-action@v4
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           pom-path: web-dist
-      - name: Upload install file
+      # Upload install file to Github Artifact
+      - name: Upload install file to Github Artifact
         uses: actions/upload-artifact@v2
         with:
           name: ${{ github.job }}
           path: web-dist/target/lena-work/
+      # Set up Docker
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
       - name: Login to GitHub Container Registry
@@ -258,7 +230,10 @@ jobs:
         uses: ASzc/change-string-case-action@v1
         with:
           string: ${{ github.repository }}
-      - name: Build and push
+      - name: Set current date as env variable
+        run: echo "datetime=$(date +'%y%m%d%H%M%S')" >> $GITHUB_ENV
+      # Build And Push to ghcr
+      - name: Build and push container
         uses: docker/build-push-action@v2
         with:
           context: .
@@ -268,3 +243,117 @@ jobs:
             FROM_IMAGE=ubuntu:18.04
           tags: |
             ghcr.io/${{ steps.repository.outputs.lowercase }}:${{ steps.get-version.outputs.version }}_${{ github.job }}
+      # Run conatiner for simple test
+      - name: Docker Run Action
+        id: dockerRunAction
+        uses: addnab/docker-run-action@v3
+        with:
+          image: ghcr.io/${{ steps.repository.outputs.lowercase }}:${{ steps.get-version.outputs.version }}_${{ github.job }}
+          shell: bash
+          run: |
+            echo "========================="
+            ${LENA_HOME}/servers/${SERVER_NAME}/start.sh
+            ${LENA_HOME}/servers/${SERVER_NAME}/ps.sh
+            if [ "$?" -eq "0" ] ; then
+              RESULT=SUCCESS
+            else
+              RESULT=FAIL
+            fi
+            echo '::set-output name=RESULT::'${RESULT}
+            echo "========================="
+      # Check server status
+      - name: PS script Result Check
+        if: ${{ steps.dockerRunAction.outputs.RESULT != 'SUCCESS' }}
+        uses: actions/github-script@v3
+        with:
+          script: |
+            core.setFailed('Command Failed [ ps.sh ]')
+  amazonlinux2:
+    name: ${{ github.job }}
+    runs-on: ubuntu-latest
+    steps:
+      # check out repo
+      - uses: actions/checkout@v2
+      # setup JDK
+      - name: Set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+      # Compile Web
+      - name: Compile Web
+        uses: ./web-compile/action/amazonlinux2
+      - name: maven-settings-xml-action
+        uses: whelk-io/maven-settings-xml-action@v14
+        with:
+          repositories: '[{ "id": "github", "url": "https://maven.pkg.github.com/openlena/*" }]'
+          servers: ${{secrets.GH_MVN_REPO_USER_INFO}}
+      # Build Install file
+      - name: Build Open LENA Web install file
+        run: mvn -B package --file web-dist/pom.xml -Dcompile.os.name=${{ github.job }}
+      # Get Version from maven pom.xml
+      - name: Bump Version
+        id: get-version
+        uses: nnichols/maven-version-bump-action@v4
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          pom-path: web-dist
+      # Upload install file to Github Artifact
+      - name: Upload install file to Github Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ github.job }}
+          path: web-dist/target/lena-work/
+      # Set up Docker
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - id: repository
+        name: change github.repository string to lowercase
+        uses: ASzc/change-string-case-action@v1
+        with:
+          string: ${{ github.repository }}
+      - name: Set current date as env variable
+        run: echo "datetime=$(date +'%y%m%d%H%M%S')" >> $GITHUB_ENV
+      # Build And Push to ghcr
+      - name: Build and push container
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./web-containerization/Dockerfile
+          push: true
+          build-args: |
+            FROM_IMAGE=amazonlinux:2
+          tags: |
+            ghcr.io/${{ steps.repository.outputs.lowercase }}:${{ steps.get-version.outputs.version }}_${{ github.job }}
+      # Run conatiner for simple test
+      - name: Docker Run Action
+        id: dockerRunAction
+        uses: addnab/docker-run-action@v3
+        with:
+          image: ghcr.io/${{ steps.repository.outputs.lowercase }}:${{ steps.get-version.outputs.version }}_${{ github.job }}
+          shell: bash
+          run: |
+            echo "========================="
+            ${LENA_HOME}/servers/${SERVER_NAME}/start.sh
+            ${LENA_HOME}/servers/${SERVER_NAME}/ps.sh
+            if [ "$?" -eq "0" ] ; then
+              RESULT=SUCCESS
+            else
+              RESULT=FAIL
+            fi
+            echo '::set-output name=RESULT::'${RESULT}
+            echo "========================="
+      # Check server status
+      - name: PS script Result Check
+        if: ${{ steps.dockerRunAction.outputs.RESULT != 'SUCCESS' }}
+        uses: actions/github-script@v3
+        with:
+          script: |
+            core.setFailed('Command Failed [ ps.sh ]')
+

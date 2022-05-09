@@ -1,5 +1,8 @@
-name: '[Dev] Pull Request Build Action'
+name: '[ Dev / PR ] Build LENA Web'
 on:
+  pull_request:
+    branches:
+      - 'master'
   push:
     branches:
       - 'dev/**'
@@ -378,7 +381,7 @@ jobs:
             echo "========================="
       # Check server status
       - name: PS script Result Check
-        if: ${{ steps.dockerRunAction.outputs.RESULT != 'SUCCESS1' }}
+        if: ${{ steps.dockerRunAction.outputs.RESULT != 'SUCCESS' }}
         uses: actions/github-script@v3
         with:
           script: |
