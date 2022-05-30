@@ -1,11 +1,11 @@
 # default install value
 installer.java.version=${java.version}
 
-lena-was.service-port.default=7000
-lena-was.template.dirname=base
+lat-was.service-port.default=7000
+lat-was.template.dirname=base
 
 
-lena-web.template.dirname=base
+lat-web.template.dirname=base
 
 # etc
 clone.exclude-dir-names=.classes,history,snapshot,logs,work

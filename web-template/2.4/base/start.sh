@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Copyright 2021 LENA Development Team.
+# Copyright 2022 LA:T Development Team.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with
@@ -19,7 +19,7 @@ SCRIPT=$SCRIPTPATH/$(basename $0)
 
 . ${SCRIPTPATH}/env.sh
 
-echo "Start LENA [web] ... ${SERVER_ID}"
+echo "Start LA:T [web] ... ${SERVER_ID}"
 
 RUNNER=`whoami`
 

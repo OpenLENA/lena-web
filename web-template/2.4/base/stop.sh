@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Copyright 2021 LENA Development Team.
+# Copyright 2022 LA:T Development Team.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with
@@ -33,7 +33,7 @@ ps_check(){
 
 [ `ps_check` -eq 0 ] && echo "##### ${SERVER_ID} is not running. There is nothing to stop.#######" && exit 1
 
-echo "Stop LENA [web] ... ${SERVER_ID}"
+echo "Stop LA:T [web] ... ${SERVER_ID}"
 
 # set command
 case ${COMMAND} in

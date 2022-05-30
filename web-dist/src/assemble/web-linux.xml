@@ -26,9 +26,9 @@
     <dependencySets>
         <dependencySet>
             <includes>
-                <include>io.openlena:lena-ctl:jar</include>
+                <include>io.lat:lat-ctl:jar</include>
             </includes>
-            <outputDirectory>modules/lena-ctl/lib</outputDirectory>
+            <outputDirectory>modules/lat-ctl/lib</outputDirectory>
         </dependencySet>
     </dependencySets>
 
@@ -85,7 +85,7 @@
                 <exclude>**/.keep</exclude>
             </excludes>
             <fileMode>0755</fileMode>
-            <outputDirectory>./modules/lena-web-pe</outputDirectory>
+            <outputDirectory>./modules/lat-web-pe</outputDirectory>
         </fileSet>
         <!-- end of web template-->
 
@@ -100,7 +100,7 @@
                 <exclude>**/.keep</exclude>
             </excludes>
             <fileMode>0755</fileMode>
-            <outputDirectory>./modules/lena-web-pe/bin</outputDirectory>
+            <outputDirectory>./modules/lat-web-pe/bin</outputDirectory>
         </fileSet>
         <!-- end of web template-->
     </fileSets>

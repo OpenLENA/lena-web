@@ -79,8 +79,8 @@ jobs:
           shell: bash
           run: |
             echo "========================="
-            ${LENA_HOME}/servers/${SERVER_NAME}/start.sh
-            ${LENA_HOME}/servers/${SERVER_NAME}/ps.sh
+            ${LAT_HOME}/servers/${SERVER_NAME}/start.sh
+            ${LAT_HOME}/servers/${SERVER_NAME}/ps.sh
             if [ "$?" -eq "0" ] ; then
               RESULT=SUCCESS
             else
@@ -176,8 +176,8 @@ jobs:
           shell: bash
           run: |
             echo "========================="
-            ${LENA_HOME}/servers/${SERVER_NAME}/start.sh
-            ${LENA_HOME}/servers/${SERVER_NAME}/ps.sh
+            ${LAT_HOME}/servers/${SERVER_NAME}/start.sh
+            ${LAT_HOME}/servers/${SERVER_NAME}/ps.sh
             if [ "$?" -eq "0" ] ; then
               RESULT=SUCCESS
             else
@@ -273,8 +273,8 @@ jobs:
           shell: bash
           run: |
             echo "========================="
-            ${LENA_HOME}/servers/${SERVER_NAME}/start.sh
-            ${LENA_HOME}/servers/${SERVER_NAME}/ps.sh
+            ${LAT_HOME}/servers/${SERVER_NAME}/start.sh
+            ${LAT_HOME}/servers/${SERVER_NAME}/ps.sh
             if [ "$?" -eq "0" ] ; then
               RESULT=SUCCESS
             else
@@ -370,8 +370,8 @@ jobs:
           shell: bash
           run: |
             echo "========================="
-            ${LENA_HOME}/servers/${SERVER_NAME}/start.sh
-            ${LENA_HOME}/servers/${SERVER_NAME}/ps.sh
+            ${LAT_HOME}/servers/${SERVER_NAME}/start.sh
+            ${LAT_HOME}/servers/${SERVER_NAME}/ps.sh
             if [ "$?" -eq "0" ] ; then
               RESULT=SUCCESS
             else

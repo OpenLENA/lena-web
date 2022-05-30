@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Copyright 2021 LENA Development Team.
+# Copyright 2022 LA:T Development Team.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with
@@ -66,7 +66,7 @@ fi
 if [ ! -d ${DIST_TARGET_DEPOT_PATH}/template ]; then
 	mkdir -p ${DIST_TARGET_DEPOT_PATH}/template
 fi
-cp -rf ${ROOT_PROJECT_PATH}/web-compile/bin/lenactl.sh ${DIST_TARGET_PATH}/bin
+cp -rf ${ROOT_PROJECT_PATH}/web-compile/bin/latctl.sh ${DIST_TARGET_PATH}/bin
 cp -rf ${ROOT_PROJECT_PATH}/web-compile/bin/web-common.sh ${DIST_TARGET_PATH}/bin
 cp -rf ${ROOT_PROJECT_PATH}/web-compile/bin/web-compile.sh ${DIST_TARGET_PATH}/bin
 cp -rf ${ROOT_PROJECT_PATH}/web-compile/bin/web-package-install.sh ${DIST_TARGET_PATH}/bin

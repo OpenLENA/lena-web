@@ -1,6 +1,6 @@
 @echo off
 
-rem Copyright 2021 LENA Development Team.
+rem Copyright 2022 LA:T Development Team.
 rem
 rem Licensed under the Apache License, Version 2.0 (the "License");
 rem you may not use this file except in compliance with
@@ -16,12 +16,12 @@ rem limitations under the License.
 
 set SCRIPTPATH=%~dp0
 
-set LENA_HOME=C:\engn001\lenaw\1.2
-set ENGN_HOME=C:\engn001\lena\1.2\modules\lena-web-pe
-set SERVER_ID=lenaw_80
+set LAT_HOME=C:\engn001\lat\1.2
+set ENGN_HOME=C:\engn001\lat\1.2\modules\lat-web-pe
+set SERVER_ID=latw_80
 set SERVICE_PORT=80
 set RUN_USER=%username%
-set WIN_SERVICE_NAME=lena-%SERVER_ID%
+set WIN_SERVICE_NAME=lat-%SERVER_ID%
 set SHUTDOWN_GRACEFUL=false
 FOR /F %%i IN ('hostname') DO SET HOSTNAME=%%i
 
@@ -35,8 +35,7 @@ set LOG_HOME=%INSTALL_PATH%\logs
 set LOG_MAX_DAYS=0
 set MPM_TYPE=MPM_WINNT
 set GRACEFUL_SHUTDOWN_TIMEOUT=0
-set LENA_NAME=%SERVER_ID%
-set INST_NAME=%LENA_NAME%_%HOSTNAME%
+set INST_NAME=%SERVER_ID%_%HOSTNAME%
 set TRACE_ENABLED=false
 set DATETIME=
 for /F "usebackq tokens=1,2 delims==" %%i in (`wmic os get LocalDateTime /VALUE 2^>NUL`) do if '.%%i.'=='.LocalDateTime.' set DATETIME=%%j

@@ -4,7 +4,7 @@
 	</servers>
 	<modules>
 		<module>
-			<id>lena-ctl</id>
+			<id>lat-ctl</id>
 			<version>${project.version}</version>
 		</module>
 	</modules>

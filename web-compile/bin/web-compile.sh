@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Copyright 2021 LENA Development Team.
+# Copyright 2022 LA:T Development Team.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with
@@ -19,15 +19,15 @@
 # ---------------------------------------------------------------------------
 
 SCRIPTPATH=`cd $(dirname $0) ; pwd -P`
-LENA_HOME=`cd ${SCRIPTPATH}/.. ; pwd -P`
+LAT_HOME=`cd ${SCRIPTPATH}/.. ; pwd -P`
 
-. ${LENA_HOME}/bin/web-common.sh ${LENA_HOME}
+. ${LAT_HOME}/bin/web-common.sh ${LAT_HOME}
 
 setup_environment() {
-	WEB_ENGINE_TARGET_PATH=${LENA_HOME}/modules/${WEB_SERVER_DEPOT_NAME}
+	WEB_ENGINE_TARGET_PATH=${LAT_HOME}/modules/${WEB_SERVER_DEPOT_NAME}
 	
-	if [ -r "${LENA_HOME}/etc/info/web-server-engine-path.info" ]; then
-		WEB_ENGINE_TARGET_PATH=`cat ${LENA_HOME}/etc/info/web-server-engine-path.info`
+	if [ -r "${LAT_HOME}/etc/info/web-server-engine-path.info" ]; then
+		WEB_ENGINE_TARGET_PATH=`cat ${LAT_HOME}/etc/info/web-server-engine-path.info`
 		info "web-server engine is already compiled!!"
 		end_fail
 	else
@@ -43,7 +43,7 @@ setup_environment() {
 	fi
 }
 
-compile_lena_web_server_all() {
+compile_lat_web_server_all() {
 	if [ "${_OS_NAME}" = "AIX" ]; then
 		load_environment_vairable_for_aix xlc
 		compile_web_engine ${WEB_SERVER_DEPOT_PATH}/module/web-engine/src ${WEB_ENGINE_TARGET_PATH}
@@ -67,8 +67,8 @@ compile_lena_web_server_all() {
 		#check_exit_code $?
 	fi
 	
-	if [ -f "${LENA_HOME}/modules/lena-web-pe/modules/mod_cmx.so" ]; then
-		cp -f ${LENA_HOME}/modules/lena-web-pe/modules/mod_cmx.so ${WEB_ENGINE_TARGET_PATH}/modules
+	if [ -f "${LAT_HOME}/modules/lat-web-pe/modules/mod_cmx.so" ]; then
+		cp -f ${LAT_HOME}/modules/lat-web-pe/modules/mod_cmx.so ${WEB_ENGINE_TARGET_PATH}/modules
 	fi
 }
 
@@ -91,16 +91,16 @@ if [ -z "${COMMAND}" ]; then
 fi
 
 if [ -z "${SERVER_TYPE}" ]; then
-	SERVER_TYPE="lena-web"
+	SERVER_TYPE="lat-web"
 fi
 setup_environment
 
-WEB_SERVER_DEPOT_PATH=${LENA_HOME}/depot/${WEB_SERVER_DEPOT_NAME}/${WEB_SERVER_VERSION}
+WEB_SERVER_DEPOT_PATH=${LAT_HOME}/depot/${WEB_SERVER_DEPOT_NAME}/${WEB_SERVER_VERSION}
 chmod -R 755 ${WEB_SERVER_DEPOT_PATH}
-compile_lena_web_server_all
+compile_lat_web_server_all
 
 
-echo ${WEB_ENGINE_TARGET_PATH} > ${LENA_HOME}/etc/info/web-server-engine-path.info
+echo ${WEB_ENGINE_TARGET_PATH} > ${LAT_HOME}/etc/info/web-server-engine-path.info
 
 info_emphasized "Compile is completed."
 exit 0;

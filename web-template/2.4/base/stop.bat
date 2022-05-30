@@ -1,6 +1,6 @@
 @echo off
 
-rem Copyright 2021 LENA Development Team.
+rem Copyright 2022 LA:T Development Team.
 rem
 rem Licensed under the Apache License, Version 2.0 (the "License");
 rem you may not use this file except in compliance with
