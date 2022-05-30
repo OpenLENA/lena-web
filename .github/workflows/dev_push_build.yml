@@ -1,4 +1,4 @@
-name: '[ Dev / PR ] Build LENA Web'
+name: '[ Dev / PR ] Build LA:T Web'
 on:
   pull_request:
     branches:
@@ -25,10 +25,10 @@ jobs:
       - name: maven-settings-xml-action
         uses: whelk-io/maven-settings-xml-action@v14
         with:
-          repositories: '[{ "id": "github", "url": "https://maven.pkg.github.com/openlena/*" }]'
+          repositories: '[{ "id": "github", "url": "https://maven.pkg.github.com/atlena/*" }]'
           servers: ${{secrets.GH_MVN_REPO_USER_INFO}}
       # Build Install file
-      - name: Build Open LENA Web install file
+      - name: Build Open LA:T Web install file
         run: mvn -B package --file web-dist/pom.xml -Dcompile.os.name=${{ github.job }}
       # Get Version from maven pom.xml
       - name: Bump Version
@@ -42,7 +42,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: ${{ github.job }}
-          path: web-dist/target/lena-work/
+          path: web-dist/target/lat-work/
       # Set up Docker
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
@@ -100,8 +100,8 @@ jobs:
         if: always()
         uses: bots-house/ghcr-delete-image-action@v1.0.1
         with:
-          owner: openlena
-          name: lena-web
+          owner: lat
+          name: lat-web
           token: ${{ secrets.GH_PAT_FULL_ACCESS_AUTH }}
           tag: ${{ steps.get-version.outputs.version }}_${{ github.job }}_${{ env.datetime }}
   rocky8:
@@ -122,10 +122,10 @@ jobs:
       - name: maven-settings-xml-action
         uses: whelk-io/maven-settings-xml-action@v14
         with:
-          repositories: '[{ "id": "github", "url": "https://maven.pkg.github.com/openlena/*" }]'
+          repositories: '[{ "id": "github", "url": "https://maven.pkg.github.com/atlena/*" }]'
           servers: ${{secrets.GH_MVN_REPO_USER_INFO}}
       # Build Install file
-      - name: Build Open LENA Web install file
+      - name: Build Open LA:T Web install file
         run: mvn -B package --file web-dist/pom.xml -Dcompile.os.name=${{ github.job }}
       # Get Version from maven pom.xml
       - name: Bump Version
@@ -139,7 +139,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: ${{ github.job }}
-          path: web-dist/target/lena-work/
+          path: web-dist/target/lat-work/
       # Set up Docker
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
@@ -197,8 +197,8 @@ jobs:
         if: always()
         uses: bots-house/ghcr-delete-image-action@v1.0.1
         with:
-          owner: openlena
-          name: lena-web
+          owner: lat
+          name: lat-web
           token: ${{ secrets.GH_PAT_FULL_ACCESS_AUTH }}
           tag: ${{ steps.get-version.outputs.version }}_${{ github.job }}_${{ env.datetime }}
   ubuntu1804:
@@ -219,10 +219,10 @@ jobs:
       - name: maven-settings-xml-action
         uses: whelk-io/maven-settings-xml-action@v14
         with:
-          repositories: '[{ "id": "github", "url": "https://maven.pkg.github.com/openlena/*" }]'
+          repositories: '[{ "id": "github", "url": "https://maven.pkg.github.com/atlena/*" }]'
           servers: ${{secrets.GH_MVN_REPO_USER_INFO}}
       # Build Install file
-      - name: Build Open LENA Web install file
+      - name: Build Open LA:T Web install file
         run: mvn -B package --file web-dist/pom.xml -Dcompile.os.name=${{ github.job }}
       # Get Version from maven pom.xml
       - name: Bump Version
@@ -236,7 +236,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: ${{ github.job }}
-          path: web-dist/target/lena-work/
+          path: web-dist/target/lat-work/
       # Set up Docker
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
@@ -294,8 +294,8 @@ jobs:
         if: always()
         uses: bots-house/ghcr-delete-image-action@v1.0.1
         with:
-          owner: openlena
-          name: lena-web
+          owner: lat
+          name: lat-web
           token: ${{ secrets.GH_PAT_FULL_ACCESS_AUTH }}
           tag: ${{ steps.get-version.outputs.version }}_${{ github.job }}_${{ env.datetime }}
   amazonlinux2:
@@ -316,10 +316,10 @@ jobs:
       - name: maven-settings-xml-action
         uses: whelk-io/maven-settings-xml-action@v14
         with:
-          repositories: '[{ "id": "github", "url": "https://maven.pkg.github.com/openlena/*" }]'
+          repositories: '[{ "id": "github", "url": "https://maven.pkg.github.com/atlena/*" }]'
           servers: ${{secrets.GH_MVN_REPO_USER_INFO}}
       # Build Install file
-      - name: Build Open LENA Web install file
+      - name: Build Open LA:T Web install file
         run: mvn -B package --file web-dist/pom.xml -Dcompile.os.name=${{ github.job }}
       # Get Version from maven pom.xml
       - name: Bump Version
@@ -333,7 +333,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: ${{ github.job }}
-          path: web-dist/target/lena-work/
+          path: web-dist/target/lat-work/
       # Set up Docker
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
@@ -391,8 +391,8 @@ jobs:
         if: always()
         uses: bots-house/ghcr-delete-image-action@v1.0.1
         with:
-          owner: openlena
-          name: lena-web
+          owner: lat
+          name: lat-web
           token: ${{ secrets.GH_PAT_FULL_ACCESS_AUTH }}
           tag: ${{ steps.get-version.outputs.version }}_${{ github.job }}_${{ env.datetime }}
 
