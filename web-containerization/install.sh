@@ -40,6 +40,10 @@ echo "" >> ${INSTALL_ARG_FILE}                # document root path - use default
 
 ### install
 cat ${INSTALL_ARG_FILE}
+
+echo ${LAT_HOME}
+echo "COMMAND: create"
+echo "SERVER_TYPE: lat-web"
 /bin/bash ${LAT_HOME}/bin/latctl.sh create lat-web < ${INSTALL_ARG_FILE}
 
 # create image build info
