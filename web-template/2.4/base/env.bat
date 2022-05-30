@@ -16,7 +16,7 @@ rem limitations under the License.
 
 set SCRIPTPATH=%~dp0
 
-set LAT_HOME=C:\engn001\lat\1.2
+set LAT_HOME=C:\engn001\latw\1.2
 set ENGN_HOME=C:\engn001\lat\1.2\modules\lat-web-pe
 set SERVER_ID=latw_80
 set SERVICE_PORT=80

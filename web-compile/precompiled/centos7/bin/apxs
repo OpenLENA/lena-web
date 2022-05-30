@@ -28,14 +28,14 @@ package apxs;
 #   is the empty string.
 
 my $destdir = "";
-my $ddi = rindex($0, "/engn001/lenaw/lena-web-server/target/lena-web-server/bin");
+my $ddi = rindex($0, "/engn001/latw/lat-web-server/target/lat-web-server/bin");
 if ($ddi >= 0) {
   $destdir = substr($0, 0, $ddi);
 }
 
 my %config_vars = ();
 
-my $installbuilddir = "/engn001/lenaw/lena-web-server/target/lena-web-server/build";
+my $installbuilddir = "/engn001/latw/lat-web-server/target/lat-web-server/build";
 get_config_vars($destdir . "$installbuilddir/config_vars.mk",\%config_vars);
 
 # read the configuration variables once
