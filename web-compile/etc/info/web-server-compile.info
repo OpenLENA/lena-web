@@ -1,7 +1,7 @@
 # Server base information
 WEB_SERVER_NAME=web-server
 WEB_SERVER_VERSION=0.1.0-SNAPSHOT
-WEB_SERVER_DEPOT_NAME=lat-web
+WEB_SERVER_DEPOT_NAME=lat-apache
 
 # oss information for httpd
 HTTPD_VERSION=2.4.53

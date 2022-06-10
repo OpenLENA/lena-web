@@ -14,7 +14,7 @@
         <web-assembly.workDir>${project.build.directory}/lat-work</web-assembly.workDir>
         <web-assembly.editionName>open-edition</web-assembly.editionName>
         <!--suppress UnresolvedMavenProperty -->
-        <web-assembly.finalName>lat-web-${web-assembly.editionName}-${project.version}-${compile.os.name}</web-assembly.finalName>
+        <web-assembly.finalName>lat-apache-${web-assembly.editionName}-${project.version}-${compile.os.name}</web-assembly.finalName>
     </properties>
 
     <dependencies>
