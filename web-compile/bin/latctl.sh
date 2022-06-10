@@ -163,7 +163,7 @@ _JAVA_OPTS="-Duser_java.home=${JAVA_HOME} -Dlat.home=${LAT_HOME} -Dhostname=${HO
 
 case ${COMMAND} in
 compile)
-  if [ "${SERVER_TYPE}" = "apache-server" ] || [ "${SERVER_TYPE}" = "lat-web" ]; then
+  if [ "${SERVER_TYPE}" = "apache-server" ] || [ "${SERVER_TYPE}" = "apache" ]; then
     ${LAT_HOME}/bin/web-compile.sh ${ARGUMENTS}
   else
     ${JAVA_HOME}/bin/java ${_CLASSPATH} ${_JAVA_OPTS} "argo.install.Main"
