@@ -101,7 +101,7 @@ jobs:
         uses: bots-house/ghcr-delete-image-action@v1.0.1
         with:
           owner: lat
-          name: lat-apache
+          name: apache
           token: ${{ secrets.GH_PAT_FULL_ACCESS_AUTH }}
           tag: ${{ steps.get-version.outputs.version }}_${{ github.job }}_${{ env.datetime }}
   rocky8:
@@ -198,7 +198,7 @@ jobs:
         uses: bots-house/ghcr-delete-image-action@v1.0.1
         with:
           owner: lat
-          name: lat-apache
+          name: apache
           token: ${{ secrets.GH_PAT_FULL_ACCESS_AUTH }}
           tag: ${{ steps.get-version.outputs.version }}_${{ github.job }}_${{ env.datetime }}
   ubuntu1804:
@@ -295,7 +295,7 @@ jobs:
         uses: bots-house/ghcr-delete-image-action@v1.0.1
         with:
           owner: lat
-          name: lat-apache
+          name: apache
           token: ${{ secrets.GH_PAT_FULL_ACCESS_AUTH }}
           tag: ${{ steps.get-version.outputs.version }}_${{ github.job }}_${{ env.datetime }}
   amazonlinux2:
@@ -392,7 +392,7 @@ jobs:
         uses: bots-house/ghcr-delete-image-action@v1.0.1
         with:
           owner: lat
-          name: lat-apache
+          name: apache
           token: ${{ secrets.GH_PAT_FULL_ACCESS_AUTH }}
           tag: ${{ steps.get-version.outputs.version }}_${{ github.job }}_${{ env.datetime }}
 
