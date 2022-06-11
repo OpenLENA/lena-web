@@ -91,7 +91,7 @@ if [ -z "${COMMAND}" ]; then
 fi
 
 if [ -z "${SERVER_TYPE}" ]; then
-	SERVER_TYPE="lat-web"
+	SERVER_TYPE="apache"
 fi
 setup_environment
 

@@ -1,11 +1,11 @@
 # default install value
 installer.java.version=${java.version}
 
-lat-was.service-port.default=7000
-lat-was.template.dirname=base
+tomcat.service-port.default=7000
+tomcat.template.dirname=base
 
 
-lat-web.template.dirname=base
+apache.template.dirname=base
 
 # etc
 clone.exclude-dir-names=.classes,history,snapshot,logs,work
