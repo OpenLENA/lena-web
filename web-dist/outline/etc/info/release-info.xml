@@ -6,7 +6,7 @@
 	<depot>
 		<modules>
 			<module>
-				<id>lat-apache</id>
+				<id>apache</id>
 				<version>${project.version}</version>
 			</module>
 		</modules>
