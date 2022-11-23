@@ -1,6 +1,6 @@
 
 
-# <img src="docs/images/lat_logo.png" width="800">  
+# <img src="docs/images/lat_logo.png" width="200">  
 [![Build Artifact & Container](https://github.com/OpenLENA/lena-web/actions/workflows/push_build.yml/badge.svg)](https://github.com/OpenLENA/lena-web/actions/workflows/push_build.yml)
 
 
