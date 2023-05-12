@@ -1,4 +1,4 @@
-name: '[ Merge Master ] Build LA:T Web'
+name: '[ Merge Master ] Build LA:T Web and release file'
 on:
   push:
     branches:
