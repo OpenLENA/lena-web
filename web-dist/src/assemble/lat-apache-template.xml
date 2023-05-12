@@ -27,7 +27,7 @@
     <fileSets>
 
         <fileSet>
-            <directory>../web-compile/web-dist/target/web-server/depot/apache/0.1.0-SNAPSHOT/template</directory>
+            <directory>../web-compile/web-dist/target/web-server/depot/apache/${version}/template</directory>
             <includes>
                 <include>base/**</include>
             </includes>
