@@ -1,0 +1,102 @@
+<!--
+   Licensed to the Apache Software Foundation (ASF) under one or more
+   contributor license agreements.  See the NOTICE file distributed with
+   this work for additional information regarding copyright ownership.
+   The ASF licenses this file to You under the Apache License, Version 2.0
+   (the "License"); you may not use this file except in compliance with
+   the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+
+-->
+<assembly xmlns="http://maven.apache.org/ASSEMBLY/2.1.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.1.0 http://maven.apache.org/xsd/assembly-2.1.0.xsd">
+    <id>binary</id>
+    <formats>
+        <format>tar.gz</format>
+    </formats>
+    <includeBaseDirectory>true</includeBaseDirectory>
+
+
+    <fileSets>
+        <!-- start of outline -->
+        <fileSet>
+            <directory>../web-dist/outline</directory>
+            <includes>
+                <include>modules/lat-web-pe/**</include>
+            </includes>
+            <excludes>
+                <exclude>**/*.bat</exclude>
+                <exclude>**/.keep</exclude>
+                <exclude>etc/info/release-info.xml</exclude>
+                <exclude>etc/info/install-info.xml</exclude>
+            </excludes>
+            <fileMode>0755</fileMode>
+            <outputDirectory>..</outputDirectory>
+        </fileSet>
+        <!-- end of outline -->
+        <!-- start of web template-->
+        <fileSet>
+            <directory>../web-compile/web-dist/target/web-server</directory>
+            <includes>
+                <include>modules/lat-web-pe/**</include>
+            </includes>
+            <excludes>
+                <exclude>**/*.bat</exclude>
+                <exclude>**/.keep</exclude>
+            </excludes>
+            <fileMode>0755</fileMode>
+            <outputDirectory>..</outputDirectory>
+        </fileSet>
+        <!-- end of web template-->
+        <!-- start of web template-->
+        <fileSet>
+            <directory>../target/web-server</directory>
+            <includes>
+                <include>bin/**</include>
+                <include>error/**</include>
+                <include>icons/**</include>
+                <include>lib/**</include>
+                <include>modules/**</include>
+            </includes>
+            <excludes>
+                <exclude>bin/apachectl</exclude>
+                <exclude>bin/apr-1-config</exclude>
+                <exclude>bin/apu-1-config</exclude>
+                <exclude>bin/apxs</exclude>
+                <exclude>bin/dbmmanage</exclude>
+                <exclude>bin/envvars</exclude>
+                <exclude>bin/envvars-std</exclude>
+                <exclude>**/*.bat</exclude>
+                <exclude>**/.keep</exclude>
+            </excludes>
+            <fileMode>0755</fileMode>
+            <outputDirectory>./</outputDirectory>
+        </fileSet>
+        <!-- end of web template-->
+
+        <!-- start of web precompiled files-->
+        <fileSet>
+            <directory>../web-compile/precompiled/centos7/bin</directory>
+            <includes>
+                <include>**</include>
+            </includes>
+            <excludes>
+                <exclude>**/*.bat</exclude>
+                <exclude>**/.keep</exclude>
+            </excludes>
+            <fileMode>0755</fileMode>
+            <outputDirectory>./bin</outputDirectory>
+        </fileSet>
+        <!-- end of web template-->
+    </fileSets>
+
+</assembly>
+
