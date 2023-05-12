@@ -62,7 +62,7 @@
                             </descriptors>
                             <tarLongFileMode>gnu</tarLongFileMode>
                             <appendAssemblyId>false</appendAssemblyId>
-                            <outputDirectory>${lat-all-work.workDir}</outputDirectory>
+                            <outputDirectory>${apache-runtime.outputDir}</outputDirectory>
                             <finalName>${apache-runtime.finalName}</finalName>
                         </configuration>
                     </execution>
@@ -79,7 +79,7 @@
                             </descriptors>
                             <tarLongFileMode>gnu</tarLongFileMode>
                             <appendAssemblyId>false</appendAssemblyId>
-                            <outputDirectory>${lat-all-work.workDir}</outputDirectory>
+                            <outputDirectory>${apache-template.outputDir}</outputDirectory>
                             <finalName>${apache-template.finalName}</finalName>
                         </configuration>
                     </execution>
