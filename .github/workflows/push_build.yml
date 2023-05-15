@@ -40,7 +40,7 @@ jobs:
         with:
           name: ${{ github.job }}
           path: web-dist/target/lat-work/
-      # Set up Docker
+          # Set up Docker
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
       - name: Login to GitHub Container Registry

@@ -19,7 +19,7 @@ SCRIPT=$SCRIPTPATH/$(basename $0)
 
 . ${SCRIPTPATH}/../env.sh
 
-echo "Benchmakr LENA [web] ... ${SERVER_ID}"
+echo "Benchmakr LENA [web] ... ${INSTANCE_ID}"
 echo "**************************************************"
 echo "* Caution : This script can make lots of request *"
 echo "**************************************************"

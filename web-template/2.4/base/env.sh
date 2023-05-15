@@ -16,8 +16,11 @@
 
 SCRIPTPATH=`cd $(dirname $0) ; pwd -P`
 
-export ENGN_HOME=`cd ${SCRIPTPATH}/../../modules/lat-web-pe; pwd -P`
-export SERVER_ID=lat-apache
+export LAT_HOME=/apps/lat/1.0.0
+export ENGN_VERSION=2.4.53
+#export ENGN_HOME=`cd ${SCRIPTPATH}/../../../engines/apache/${ENGN_VERSION}; pwd -P`
+export ENGN_HOME=${LAT_HOME}/engines/runtime/apache/apache-${ENGN_VERSION}
+export INSTANCE_ID=lat-apache
 export SERVICE_PORT=8580
 export RUN_USER=`whoami`
 export HTTPS_SERVICE_PORT=`expr ${SERVICE_PORT} + 363`
@@ -30,8 +33,7 @@ export STAGING_HTTPS_SERVICE_PORT=`expr ${HTTPS_SERVICE_PORT} + 10000`
 export MPM_TYPE=MPM_EVENT
 export SHUTDOWN_GRACEFUL=false
 export GRACEFUL_SHUTDOWN_TIMEOUT=0
-# export LENA_NAME=${SERVER_ID}
-export INST_NAME=${SERVER_ID}_`hostname`
+export INST_NAME=${INSTANCE_ID}_`hostname`
 export TRACE_DTM=5000000
 export EXT_MODULE_NAMES=
 export EXT_MODULE_DEFINES=
