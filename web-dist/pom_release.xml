@@ -6,7 +6,7 @@
 
     <groupId>io.atlena</groupId>
     <artifactId>web-dist</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
+    <version>0.0.1-SNAPSHOT</version>
 
     <properties>
         <apache.version>2.4.53</apache.version>

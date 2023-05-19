@@ -40,7 +40,7 @@ jobs:
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
-          source_file: web-dist/target/apache/
+          source_file: web-dist/target/apache
           destination_repo: ATLENA/lat-engine
           destination_folder: ./
           user_email: 'seosej@gmail.com '
