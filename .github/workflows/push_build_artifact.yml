@@ -40,8 +40,9 @@ jobs:
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
-          source_file: 'web-dist/target/apache/runtime/apache-2.4.53.A.RELEASE.tar.gz'
-          destination_repo: ATLENA/lat-engine
+          source_file: 'web-dist/target/apache/.'
+          destination_repo: 'ATLENA/lat-engine'
+          destination_folder: 'apache'
           user_email: 'seosej@gmail.com '
           user_name: 'Sejin Seo'
 
