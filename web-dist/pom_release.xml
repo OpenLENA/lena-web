@@ -19,7 +19,7 @@
         <apache-runtime.version>${apache.version}.A.RELEASE</apache-runtime.version>
         <apache-runtime.outputDir>${lat-all-work.workDir}/runtime</apache-runtime.outputDir>
         <apache-runtime.finalName>apache-${apache-runtime.version}</apache-runtime.finalName>
-        <apache-template.version>${apache.major.version}.B.RELEASE</apache-template.version>
+        <apache-template.version>${apache.major.version}.A.RELEASE</apache-template.version>
         <apache-template.outputDir>${lat-all-work.workDir}/template</apache-template.outputDir>
         <apache-template.finalName>apache-${apache-template.version}</apache-template.finalName>
 

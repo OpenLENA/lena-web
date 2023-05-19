@@ -45,7 +45,7 @@ jobs:
           destination_folder: ./
           user_email: 'seosej@gmail.com '
           user_name: 'Sejin Seo'
-          commit_message: New version released
+          commit_message: ${{apache-runtime.version}} released
 
       # Upload install file to Github Artifact
       - name: Upload install file to Github Artifact
