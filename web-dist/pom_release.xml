@@ -29,9 +29,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>io.atlena.lat</groupId>
-            <artifactId>lat-ctl</artifactId>
-            <version>1.0.0-RELEASE</version>
+            <groupId>org.lat</groupId>
+            <artifactId>ctl</artifactId>
+            <version>0.0.1</version>
         </dependency>
         <dependency>
             <groupId>commons-cli</groupId>
