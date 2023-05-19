@@ -27,7 +27,7 @@
     <fileSets>
 
         <fileSet>
-            <directory>../web-compile/web-dist/target/web-server/depot/apache/${version}/template</directory>
+            <directory>../web-template/${apache.major.version}/</directory>
             <includes>
                 <include>base/**</include>
             </includes>
