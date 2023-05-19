@@ -1,8 +1,8 @@
 name: '[ Merge Master ] Build LA:T Web'
-on:
-  push:
-    branches:
-      - 'master'
+#on:
+#  push:
+#    branches:
+#      - 'master'
 jobs:
   centos7:
     name: ${{ github.job }}
