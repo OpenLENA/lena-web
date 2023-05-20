@@ -34,17 +34,18 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           pom-path: web-dist
-
-      - name: Push test another repository in github engn(dmnemec)
-        uses: dmnemec/copy_file_to_another_repo_action@main
-        env:
-          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+      - uses: de-vri-es/setup-git-credentials@v2
         with:
-          source_file: 'web-dist/target/apache/.'
-          destination_repo: 'ATLENA/lat-engine'
-          destination_folder: 'apache'
-          user_email: 'seosej@gmail.com '
-          user_name: 'Sejin Seo'
+          credentials: ${{ secrets.GIT_CREDENTIALS }}
+      - name: git push
+        run: |
+          rm -rf /tmp/apache-test
+          mkdir -p /tmp/apache-test
+          git clone https://github.com/ATLENA/lat-engine.git /tmp/apache-temp
+          git config --global user.email "seosej@gmail.com"
+          git config --global user.name "seosej"
+          cp -rf web-dist/target/apache/* /tmp/apache-temp/apache/      
+          cd /tmp/apache-temp && git add . && git commit -a -m "Pushed from lat-apache" && git push
 
       # Upload install file to Github Artifact
       - name: Upload install file to Github Artifact
