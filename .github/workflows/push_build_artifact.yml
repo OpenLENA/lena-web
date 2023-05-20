@@ -44,6 +44,7 @@ jobs:
           git clone https://github.com/ATLENA/lat-engine.git /tmp/apache-temp
           git config --global user.email "seosej@gmail.com"
           git config --global user.name "seosej"
+          mkdir -p /tmp/apache-temp/apache
           cp -rf web-dist/target/apache/* /tmp/apache-temp/apache/      
           cd /tmp/apache-temp && git add . && git commit -a -m "Pushed from lat-apache" && git push
 
