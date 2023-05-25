@@ -18,7 +18,6 @@ SCRIPTPATH=`cd $(dirname $0) ; pwd -P`
 
 export LAT_HOME=/apps/lat/1.0.0
 export ENGN_VERSION=2.4.53
-#export ENGN_HOME=`cd ${SCRIPTPATH}/../../../engines/apache/${ENGN_VERSION}; pwd -P`
 export ENGN_HOME=${LAT_HOME}/engines/runtime/apache/apache-${ENGN_VERSION}
 export INSTANCE_ID=lat-apache
 export SERVICE_PORT=8580
