@@ -18,7 +18,7 @@ jobs:
           distribution: 'adopt'
       # Compile Web
       - name: Compile Web
-        uses: ./web-compile/action/centos7
+        uses: ./web-compile/action/centos8
       - name: maven-settings-xml-action
         uses: whelk-io/maven-settings-xml-action@v14
         with:
