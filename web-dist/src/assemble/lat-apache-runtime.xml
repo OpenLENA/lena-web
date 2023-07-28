@@ -101,7 +101,7 @@
                 <include>lib/**</include>
             </includes>
             <fileMode>0755</fileMode>
-            <outputDirectory>./lib</outputDirectory>
+            <outputDirectory>./</outputDirectory>
         </fileSet>
         <!-- end of web template-->
     </fileSets>
