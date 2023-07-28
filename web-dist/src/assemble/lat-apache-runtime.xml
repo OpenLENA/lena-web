@@ -95,6 +95,12 @@
             <fileMode>0755</fileMode>
             <outputDirectory>./bin</outputDirectory>
         </fileSet>
+        <fileSet>
+            <directory>../web-dist/outline</directory>
+            <includes>lib/**</includes>
+            <fileMode>0755</fileMode>
+            <outputDirectory>./lib</outputDirectory>
+        </fileSet>
         <!-- end of web template-->
     </fileSets>
 
