@@ -97,7 +97,9 @@
         </fileSet>
         <fileSet>
             <directory>../web-dist/outline</directory>
-            <includes>lib/**</includes>
+            <includes>
+                <include>lib/**</include>
+            </includes>
             <fileMode>0755</fileMode>
             <outputDirectory>./lib</outputDirectory>
         </fileSet>
