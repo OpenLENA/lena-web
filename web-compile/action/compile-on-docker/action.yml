@@ -1,5 +1,5 @@
 # /action.yml
-name: 'Compile apache - Centos 8'
+name: 'Compile apache'
 description: 'add actions'
 runs:
   using: 'docker'

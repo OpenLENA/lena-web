@@ -1,6 +1,0 @@
-# /action.yml
-name: 'Compile apache - Ubuntu 18.04'
-description: 'add actions'
-runs:
-  using: 'docker'
-  image: Dockerfile

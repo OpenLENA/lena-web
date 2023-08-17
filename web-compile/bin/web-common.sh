@@ -119,17 +119,21 @@ install_package() {
 		end_fail
 	fi
 
-	local _package_install_cmd="yum"
+	local _package_install_cmd="yum install -y"
 	if `cat /etc/*-release | grep -q "Ubuntu"`; then
-    _package_install_cmd="apt-get"
+    _package_install_cmd="apt-get install -y"
+  elif `cat /etc/*-release | grep -q "Alpine"`; then
+    _package_install_cmd="apk add"
   fi
 
-	if ! is_package_installed ${_package_name} ; then
-		${_package_install_cmd} install -y ${_package_name}
-		check_exit_code $? "Package installation is failed. Please check the environment."
-	else
-		info "${_package_name} package is already installed."
-	fi
+  ${_package_install_cmd} ${_package_name}
+
+#	if ! is_package_installed ${_package_name} ; then
+#		${_package_install_cmd} install -y ${_package_name}
+#		check_exit_code $? "Package installation is failed. Please check the environment."
+#	else
+#		info "${_package_name} package is already installed."
+#	fi
 
 	return ${TRUE_VAL}
 }
@@ -140,6 +144,8 @@ install_default_package() {
 
 	if `cat /etc/*-release | grep -q "Ubuntu"`; then
     _check_packages=${DEFAULT_OS_PACKAGES_24_UBUNTU}
+  elif `cat /etc/*-release | grep -q "Alpine"`; then
+    _check_packages=${DEFAULT_OS_PACKAGES_24_ALPINE}
   else
     _check_packages=${DEFAULT_OS_PACKAGES_24}
 	  local _redhat_version=`cat /etc/redhat-release |awk '{print $4}' | cut -b1`
@@ -150,9 +156,9 @@ install_default_package() {
     fi
   fi
 	
-	if is_default_package_installed ${_web_server_type}; then
-		return ${TRUE_VAL}
-	fi
+#	if is_default_package_installed ${_web_server_type}; then
+#		return ${TRUE_VAL}
+#	fi
 	
 	for _package_name in ${_check_packages}; do
 		install_package ${_package_name}
