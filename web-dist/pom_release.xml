@@ -16,12 +16,21 @@
         <maven.build.timestamp.format>yyyy-MM-dd</maven.build.timestamp.format><!-- yyyyMMdd-HHmm -->
         <lat-all-work.workDir>${project.build.directory}/apache</lat-all-work.workDir>
         <lat-all-work.editionName>open-edition</lat-all-work.editionName>
-        <apache-runtime.version>${apache.version}.A.RELEASE</apache-runtime.version>
+        <apache-runtime.version>${apache.version}</apache-runtime.version>
         <apache-runtime.outputDir>${lat-all-work.workDir}/runtime</apache-runtime.outputDir>
-        <apache-runtime.finalName>apache-${apache-runtime.version}-${env.TARGET_OS}</apache-runtime.finalName>
-        <apache-template.version>${apache.major.version}.A.RELEASE</apache-template.version>
+        <apache-runtime.module>module_name</apache-runtime.module>
+        <apache-runtime.finalName>apache-${apache-runtime.version}-${env.TARGET_OS-runtime</apache-runtime.finalName>
+<!--      apache-runtime.module exist  -->
+<!--        <apache-runtime.finalName>apache-${apache-runtime.version}_${apache-runtime.module}-${env.TARGET_OS-runtime</apache-runtime.finalName>-->
+        <apache-template.version>${apache.version}</apache-template.version>
         <apache-template.outputDir>${lat-all-work.workDir}/template</apache-template.outputDir>
-        <apache-template.finalName>apache-${apache-template.version}</apache-template.finalName>
+        <apache-template.finalName>apache-${apache-template.version}-template</apache-template.finalName>
+<!--        <apache-runtime.version>${apache.version}.A.RELEASE</apache-runtime.version>-->
+<!--        <apache-runtime.outputDir>${lat-all-work.workDir}/runtime</apache-runtime.outputDir>-->
+<!--        <apache-runtime.finalName>apache-${apache-runtime.version}-${env.TARGET_OS}</apache-runtime.finalName>-->
+<!--        <apache-template.version>${apache.major.version}.A.RELEASE</apache-template.version>-->
+<!--        <apache-template.outputDir>${lat-all-work.workDir}/template</apache-template.outputDir>-->
+<!--        <apache-template.finalName>apache-${apache-template.version}</apache-template.finalName>-->
 
 
 

@@ -104,6 +104,14 @@
             <outputDirectory>./</outputDirectory>
         </fileSet>
         <!-- end of web template-->
+        <fileSet>
+            <directory>../web-compile/bin</directory>
+            <includes>
+                <include>validation.sh</include>
+            </includes>
+            <fileMode>0755</fileMode>
+            <outputDirectory>..</outputDirectory>
+        </fileSet>
     </fileSets>
 
 </assembly>
