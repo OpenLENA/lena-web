@@ -19,7 +19,7 @@
         <apache-runtime.version>${apache.version}</apache-runtime.version>
         <apache-runtime.outputDir>${lat-all-work.workDir}/runtime</apache-runtime.outputDir>
         <apache-runtime.module>module_name</apache-runtime.module>
-        <apache-runtime.finalName>apache-${apache-runtime.version}-${env.TARGET_OS-runtime</apache-runtime.finalName>
+        <apache-runtime.finalName>apache-${apache-runtime.version}-${env.TARGET_OS}-runtime</apache-runtime.finalName>
 <!--      apache-runtime.module exist  -->
 <!--        <apache-runtime.finalName>apache-${apache-runtime.version}_${apache-runtime.module}-${env.TARGET_OS-runtime</apache-runtime.finalName>-->
         <apache-template.version>${apache.version}</apache-template.version>
