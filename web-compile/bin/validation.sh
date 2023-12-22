@@ -18,26 +18,59 @@ echo "*******************************"
 echo "*  LA:T Server Management !      *"
 echo "*******************************"
 
+
+RUNDIR=$(dirname "$0")
+LAT_MANAGEMENT_HOME=$(
+  cd "$RUNDIR/../../../../management/latctl"
+  pwd -P
+)
+LAT_HOME=$(
+  cd "$RUNDIR/../../../.."
+  pwd -P
+)
+LAT_ENGINE_HOME=$(
+  cd "$RUNDIR/../../.."
+  pwd -P
+)
+
 ENGN_NAME=Apache
 ENGN_VERSION=2.4.53
 RUN_USER=$(whoami)
+INSTANCE_TYPE="$1"
+INSTANCE_NAME="$2"
+INSTANCE_PATH="${LAT_HOME}/instances/${INSTANCE_TYPE}/${INSTANCE_NAME}"
+LOG_LEVEL=info
+LOG_DATE=`date +%Y%m%d`
+IS_DEBUG_ENABLED="false"
 
+debug() {
+  if [ "${IS_DEBUG_ENABLED}" = "true" ]; then
+    echo "$*"
+    echo "| Instance Path : [$INSTANCE_PATH]"
+  fi
+}
 
 info() {
-  echo "$*"
+  echo "| $*"
+}
+
+error() {
+  echo "| $*" 1>&2
 }
 
 end_success() {
-  info "Validation Pass.!! [${ENGN_NAME}-${ENGN_VERSION}]"
+  info "[${ENGN_NAME}-${ENGN_VERSION}] Validation Pass.!!"
   exit 0
 }
 
 end_fail() {
-  info "Validation failed.!! [${ENGN_NAME}-${ENGN_VERSION}]"
+  error "[${ENGN_NAME}-${ENGN_VERSION}] Validation failed.!! "
   exit 1
+
 }
 
 end_success
+#end_fail
 
 
 
