@@ -57,7 +57,7 @@ jobs:
           servers: ${{secrets.GH_MVN_REPO_USER_INFO}}
       # Build Install file
       - name: Build Open LA:T Web install file
-        run: mvn -B package --file web-dist/pom_release.xml -Dcompile.os.name=${{ matrix.target-os }}
+        run: mvn -B package --file web-dist/pom_release.xml -Dcompile.os.name=${{ matrix.target-os }} -Dorg.slf4j.simpleLogger.log.org.apache.maven.plugins.assembly=debug
       - name: Push a file to another repository
         uses: dmnemec/copy_file_to_another_repo_action@v1.1.1
         env:
