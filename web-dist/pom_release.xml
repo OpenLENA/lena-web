@@ -68,6 +68,7 @@
                             <appendAssemblyId>false</appendAssemblyId>
                             <outputDirectory>${apache-runtime.outputDir}</outputDirectory>
                             <finalName>${apache-runtime.finalName}</finalName>
+                            <verbose>true</verbose>
                         </configuration>
                     </execution>
 
