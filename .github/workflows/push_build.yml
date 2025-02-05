@@ -56,6 +56,8 @@ jobs:
           repositories: '[{ "id": "github", "url": "https://maven.pkg.github.com/atlena/*" }]'
           servers: ${{secrets.GH_MVN_REPO_USER_INFO}}
       # Build Install file
+      - name: Run Shell Script to Replace Symlinks
+        run: bash web-dist/bin/copy_lib.sh
       - name: Build Open LA:T Web install file
         run: mvn -B package --file web-dist/pom_release.xml -Dcompile.os.name=${{ matrix.target-os }} -Dorg.slf4j.simpleLogger.log.org.apache.maven.plugins.assembly=debug
       - name: Push a file to another repository
