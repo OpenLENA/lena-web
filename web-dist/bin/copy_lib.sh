@@ -2,6 +2,9 @@
 
 LIB_DIR="$HOME/target/web-server/lib"
 
+echo "------before-------"
+ls $LIB_DIR -al
+
 find "$LIB_DIR" -type l | while read -r symlink; do
 
     origin_file=$(readlink "$symlink")
@@ -16,3 +19,6 @@ find "$LIB_DIR" -type l | while read -r symlink; do
         echo "Skipping $symlink (no valid origin file found)"
     fi
 done
+
+echo "------after-------"
+ls $LIB_DIR -al
