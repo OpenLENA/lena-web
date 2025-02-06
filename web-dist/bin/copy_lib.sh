@@ -1,6 +1,8 @@
 #!/bin/bash
 
-LIB_DIR="$HOME/target/web-server/lib"
+SCRIPTPATH=`cd $(dirname $0) ; pwd -P`
+ROOT_PROJECT_PATH=`cd ${SCRIPTPATH}/../.. ; pwd -P`
+LIB_DIR="$ROOT_PROJECT_PATH/target/web-server/lib"
 
 echo "------before-------"
 ls $LIB_DIR -al
