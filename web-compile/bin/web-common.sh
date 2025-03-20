@@ -332,14 +332,8 @@ compile_web_engine() {
 
   info_emphasized "Copying APR and APR-util shared libraries..."
 
-  # Copy APR shared libraries
-  cp "${_source_path}/srclib/apr/.libs/libapr-1.so"* "${_target_path}/lib/"
-
-  # Copy APR-util shared libraries
-  cp "${_source_path}/srclib/apr-util/.libs/libaprutil-1.so"* "${_target_path}/lib/"
-
   # Update library cache
-  ldconfig -n "${_target_path}/lib"
+  # ldconfig -n "${_target_path}/lib"
 
   info_emphasized "Web-engine compilation completed successfully."
 }

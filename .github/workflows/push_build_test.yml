@@ -10,7 +10,7 @@ jobs:
     strategy:
       max-parallel: 1
       matrix:
-        target-os: [ ubuntu1804 ]
+        target-os: [ ubuntu2204, alpine3.18, rocky8, amazonlinux2 ]
     env:
       TARGET_OS: ${{ matrix.target-os }}
     steps:
