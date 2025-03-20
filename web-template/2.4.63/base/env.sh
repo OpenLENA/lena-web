@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Copyright 2022 LA:T Development Team.
+# Copyright 2022 OpenLENA Development Team.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with
@@ -16,11 +16,11 @@
 
 SCRIPTPATH=`cd $(dirname $0) ; pwd -P`
 
-export LAT_HOME=/apps/lat/1.0.0
+export OPENLENA_HOME=/apps/lat/1.0.0
 export ENGN_VERSION=2.4.63
-export ENGN_HOME=${LAT_HOME}/engines/runtime/apache/${ENGN_VERSION}
+export ENGN_HOME=${OPENLENA_HOME}/engines/runtime/apache/${ENGN_VERSION}
 export TEMPLATE_VERSION=2.4.63
-export INSTANCE_ID=lat-apache
+export INSTANCE_ID=apache
 export SERVICE_PORT=8580
 export RUN_USER=`whoami`
 #export HTTPS_SERVICE_PORT=`expr ${SERVICE_PORT} + 363`

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Copyright 2022 LA:T Development Team.
+# Copyright 2022 OpenLENA Development Team.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with
@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # ---------------------------------------------------------------------------
-# LA:T build common script
+# OpenLENA build common script
 # ---------------------------------------------------------------------------
 SCRIPTPATH=`cd $(dirname $0) ; pwd -P`
 

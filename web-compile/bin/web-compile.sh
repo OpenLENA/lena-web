@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Copyright 2022 LA:T Development Team.
+# Copyright 2022 OpenLENA Development Team.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with
@@ -19,15 +19,15 @@
 # ---------------------------------------------------------------------------
 
 SCRIPTPATH=`cd $(dirname $0) ; pwd -P`
-LAT_HOME=`cd ${SCRIPTPATH}/.. ; pwd -P`
+OPENLENA_HOME=`cd ${SCRIPTPATH}/.. ; pwd -P`
 
-. ${LAT_HOME}/bin/web-common.sh ${LAT_HOME}
+. ${OPENLENA_HOME}/bin/web-common.sh ${OPENLENA_HOME}
 
 setup_environment() {
-	WEB_ENGINE_TARGET_PATH=${LAT_HOME}/modules/${WEB_SERVER_DEPOT_NAME}
+	WEB_ENGINE_TARGET_PATH=${OPENLENA_HOME}/modules/${WEB_SERVER_DEPOT_NAME}
 	
-	if [ -r "${LAT_HOME}/etc/info/web-server-engine-path.info" ]; then
-		WEB_ENGINE_TARGET_PATH=`cat ${LAT_HOME}/etc/info/web-server-engine-path.info`
+	if [ -r "${OPENLENA_HOME}/etc/info/web-server-engine-path.info" ]; then
+		WEB_ENGINE_TARGET_PATH=`cat ${OPENLENA_HOME}/etc/info/web-server-engine-path.info`
 		info "web-server engine is already compiled!!"
 		end_fail
 	else
@@ -67,8 +67,8 @@ compile_lat_web_server_all() {
 		#check_exit_code $?
 	fi
 	
-	if [ -f "${LAT_HOME}/modules/lat-web-pe/modules/mod_cmx.so" ]; then
-		cp -f ${LAT_HOME}/modules/lat-web-pe/modules/mod_cmx.so ${WEB_ENGINE_TARGET_PATH}/modules
+	if [ -f "${OPENLENA_HOME}/modules/openLena-web-pe/modules/mod_cmx.so" ]; then
+		cp -f ${OPENLENA_HOME}/modules/openLena-web-pe/modules/mod_cmx.so ${WEB_ENGINE_TARGET_PATH}/modules
 	fi
 }
 
@@ -95,12 +95,12 @@ if [ -z "${SERVER_TYPE}" ]; then
 fi
 setup_environment
 
-WEB_SERVER_DEPOT_PATH=${LAT_HOME}/depot/${WEB_SERVER_DEPOT_NAME}/${WEB_SERVER_VERSION}
+WEB_SERVER_DEPOT_PATH=${OPENLENA_HOME}/depot/${WEB_SERVER_DEPOT_NAME}/${WEB_SERVER_VERSION}
 chmod -R 755 ${WEB_SERVER_DEPOT_PATH}
 compile_lat_web_server_all
 
 
-echo ${WEB_ENGINE_TARGET_PATH} > ${LAT_HOME}/etc/info/web-server-engine-path.info
+echo ${WEB_ENGINE_TARGET_PATH} > ${OPENLENA_HOME}/etc/info/web-server-engine-path.info
 
 info_emphasized "Compile is completed."
 exit 0;

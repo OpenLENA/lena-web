@@ -1,4 +1,4 @@
-# Copyright 2022 LA:T Development Team.
+# Copyright 2022 OpenLENA Development Team.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with
@@ -15,20 +15,20 @@
 #!/bin/sh
 
 echo "*******************************"
-echo "*  LA:T Server Management !      *"
+echo "*  OpenLENA Server Management !      *"
 echo "*******************************"
 
 
 RUNDIR=$(dirname "$0")
-LAT_MANAGEMENT_HOME=$(
+OPENLENA_MANAGEMENT_HOME=$(
   cd "$RUNDIR/../../../../management/latctl"
   pwd -P
 )
-LAT_HOME=$(
+OPENLENA_HOME=$(
   cd "$RUNDIR/../../../.."
   pwd -P
 )
-LAT_ENGINE_HOME=$(
+OPENLENA_ENGINE_HOME=$(
   cd "$RUNDIR/../../.."
   pwd -P
 )
@@ -38,7 +38,7 @@ ENGN_VERSION=2.4.63
 RUN_USER=$(whoami)
 INSTANCE_TYPE="$1"
 INSTANCE_NAME="$2"
-INSTANCE_PATH="${LAT_HOME}/instances/${INSTANCE_TYPE}/${INSTANCE_NAME}"
+INSTANCE_PATH="${OPENLENA_HOME}/instances/${INSTANCE_TYPE}/${INSTANCE_NAME}"
 LOG_LEVEL=info
 LOG_DATE=`date +%Y%m%d`
 IS_DEBUG_ENABLED="false"
