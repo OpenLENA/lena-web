@@ -4,5 +4,5 @@ SCRIPTPATH=`cd $(dirname $0) ; pwd -P`
 
 . ${SCRIPTPATH}/env.sh
 
-${OPENLENA_HOME}/latctl.sh start apache ${INSTANCE_ID}
+${OPENLENA_HOME}/ctl.sh start apache ${INSTANCE_ID}
 

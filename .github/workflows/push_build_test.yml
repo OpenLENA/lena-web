@@ -68,7 +68,7 @@ jobs:
         env:
           API_TOKEN_GITHUB: ${{ secrets.LAT_ENGINE_PUSH_TOKEN }}
         with:
-          source_file: 'web-dist/target/apache/.'
+          source_file: 'web-dist/target/lat-apache/.'
           destination_repo: 'ATLENA/lat-engine-temp'
           destination_folder: 'apache'
           user_email: 'lat-apache@github.com'

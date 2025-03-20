@@ -44,7 +44,7 @@ cat ${INSTALL_ARG_FILE}
 echo ${OPENLENA_HOME}
 echo "COMMAND: create"
 echo "SERVER_TYPE: apache"
-/bin/bash ${OPENLENA_HOME}/bin/latctl.sh create apache < ${INSTALL_ARG_FILE}
+/bin/bash ${OPENLENA_HOME}/bin/ctl.sh create apache < ${INSTALL_ARG_FILE}
 
 # create image build info
 IMAGE_BUILD_INFO_FILE=${OPENLENA_HOME}/etc/info/image-build.info

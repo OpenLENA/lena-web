@@ -66,7 +66,7 @@ fi
 if [ ! -d ${DIST_TARGET_DEPOT_PATH}/template ]; then
 	mkdir -p ${DIST_TARGET_DEPOT_PATH}/template
 fi
-cp -rf ${ROOT_PROJECT_PATH}/web-compile/bin/latctl.sh ${DIST_TARGET_PATH}/bin
+cp -rf ${ROOT_PROJECT_PATH}/web-compile/bin/ctl.sh ${DIST_TARGET_PATH}/bin
 cp -rf ${ROOT_PROJECT_PATH}/web-compile/bin/web-common.sh ${DIST_TARGET_PATH}/bin
 cp -rf ${ROOT_PROJECT_PATH}/web-compile/bin/web-compile.sh ${DIST_TARGET_PATH}/bin
 cp -rf ${ROOT_PROJECT_PATH}/web-compile/bin/web-package-install.sh ${DIST_TARGET_PATH}/bin
