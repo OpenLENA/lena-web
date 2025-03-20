@@ -9,7 +9,7 @@
     <version>0.0.1-SNAPSHOT</version>
 
     <properties>
-        <apache.version>2.4.53</apache.version>
+        <apache.version>2.4.63</apache.version>
         <apache.major.version>2.4</apache.major.version>
 
         <build.timestamp>${maven.build.timestamp}</build.timestamp>

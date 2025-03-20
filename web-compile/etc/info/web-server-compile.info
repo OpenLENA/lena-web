@@ -4,8 +4,8 @@ WEB_SERVER_VERSION=0.1.0-SNAPSHOT
 WEB_SERVER_DEPOT_NAME=apache
 
 # oss information for httpd
-HTTPD_VERSION=2.4.53
-HTTPD_FILE_NAME=httpd-2.4.53.tar.gz
+HTTPD_VERSION=2.4.63
+HTTPD_FILE_NAME=httpd-2.4.63.tar.gz
 
 # oss information for tomcat-connectors
 TOMCAT_CONNECTORS_DEPOT_NAME=tomcat-connectors
@@ -13,12 +13,12 @@ TOMCAT_CONNECTORS_VERSION=1.2.48
 TOMCAT_CONNECTORS_FILE_NAME=tomcat-connectors-1.2.48-src.tar.gz
 
 # oss information for apr
-APR_VERSION=1.5.2
-APR_FILE_NAME=apr-1.5.2.tar.gz
+APR_VERSION=1.7.5
+APR_FILE_NAME=apr-1.7.5.tar.gz
 
 # oss information for apr-util
-APR_UTIL_VERSION=1.5.4
-APR_UTIL_FILE_NAME=apr-util-1.5.4.tar.gz
+APR_UTIL_VERSION=1.6.3
+APR_UTIL_FILE_NAME=apr-util-1.6.3.tar.gz
 
 # oss information for openssh
 OPENSSH_VERSION=6.3.p1
