@@ -1,0 +1,32 @@
+#!/bin/sh
+
+# Copyright 2021 LENA Development Team.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with
+# the License. You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+SCRIPTPATH=`cd $(dirname $0) ; pwd -P`
+SCRIPT=$SCRIPTPATH/$(basename $0)
+
+. ${SCRIPTPATH}/../env.sh
+
+#echo "Test Configuration [lenaw] ... ${SERVER_ID}"
+
+RUNNER=`whoami`
+
+if [ ${RUNNER} = ${RUN_USER} ] || [ ${RUNNER} = root ]; then
+  # Test Configuration
+  ${ENGN_HOME}/bin/apachectl -t -f ${INSTALL_PATH}/conf/httpd.conf -D${MPM_TYPE} ${EXT_MODULE_DEFINES}
+else
+   echo "Deny Access : [ ${RUNNER} ]. Not ${RUN_USER}" ;
+   exit 1 ;
+fi
