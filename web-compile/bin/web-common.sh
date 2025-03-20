@@ -301,6 +301,14 @@ compile_web_engine() {
   # Check if APR shared libraries exist
   if [ -f "${_source_path}/srclib/apr/.libs/libapr-1.so" ] && [ -f "${_source_path}/srclib/apr/.libs/libapr-1.so.0" ]; then
       info_emphasized "APR was built successfully."
+
+      # Step 1: Remove existing symbolic links
+      info_emphasized "Removing symbolic links of APR and copying actual libraries"
+      find "${_target_path}/lib" -maxdepth 1 -type l -name "libapr-1.so*" -exec rm -f {} +
+
+      # Step 2: Copy the actual shared libraries
+      cp -v "${_source_path}/srclib/apr/.libs/libapr-1.so"* "${_target_path}/lib/"
+
   else
       info_emphasized "APR build failed! Missing libapr-1.so"
       exit 1
@@ -309,6 +317,14 @@ compile_web_engine() {
   # Check if APR-util shared libraries exist
   if [ -f "${_source_path}/srclib/apr-util/.libs/libaprutil-1.so" ] && [ -f "${_source_path}/srclib/apr-util/.libs/libaprutil-1.so.0" ]; then
       info_emphasized "APR-util was built successfully."
+
+      # Step 1: Remove existing symbolic links
+      info_emphasized "Removing symbolic links of APR-util and copying actual libraries"
+      find "${_target_path}/lib" -maxdepth 1 -type l -name "libaprutil-1.so*" -exec rm -f {} +
+
+      # Step 2: Copy the actual shared libraries
+      cp -v "${_source_path}/srclib/apr-util/.libs/libaprutil-1.so"* "${_target_path}/lib/"
+
   else
       info_emphasized "APR-util build failed! Missing libaprutil-1.so"
       exit 1
