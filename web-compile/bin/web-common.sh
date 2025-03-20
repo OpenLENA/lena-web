@@ -21,7 +21,7 @@ SCRIPTPATH=`cd $(dirname $0) ; pwd -P`
 
 ROOT_PROJECT_PATH=${1}
 
-echo "${ROOT_PROJECT_PATH}"
+echo "here ${ROOT_PROJECT_PATH}"
 
 #. ${ROOT_PROJECT_PATH}/web-compile/etc/info/web-server-compile.info
 #
