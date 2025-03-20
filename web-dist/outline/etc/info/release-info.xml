@@ -2,7 +2,7 @@
 <release>
 	<date>${build.timestamp}</date>
 	<version>${project.version}</version>
-	<type>lat</type>
+	<type>OpenLENA</type>
 	<depot>
 		<modules>
 			<module>

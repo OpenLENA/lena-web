@@ -14,7 +14,7 @@
 
         <build.timestamp>${maven.build.timestamp}</build.timestamp>
         <maven.build.timestamp.format>yyyy-MM-dd</maven.build.timestamp.format><!-- yyyyMMdd-HHmm -->
-        <lat-all-work.workDir>${project.build.directory}/apache</lat-all-work.workDir>
+        <lat-all-work.workDir>${project.build.directory}/lat-apache</lat-all-work.workDir>
         <lat-all-work.editionName>open-edition</lat-all-work.editionName>
         <apache-runtime.version>${apache.version}</apache-runtime.version>
         <apache-runtime.outputDir>${lat-all-work.workDir}/runtime</apache-runtime.outputDir>
@@ -62,7 +62,7 @@
                         </goals>
                         <configuration>
                             <descriptors>
-                                <descriptor>src/assemble/lat-apache-runtime.xml</descriptor>
+                                <descriptor>src/assemble/openLena-apache-runtime.xml</descriptor>
                             </descriptors>
                             <tarLongFileMode>gnu</tarLongFileMode>
                             <appendAssemblyId>false</appendAssemblyId>
@@ -80,7 +80,7 @@
                         </goals>
                         <configuration>
                             <descriptors>
-                                <descriptor>src/assemble/lat-apache-template.xml</descriptor>
+                                <descriptor>src/assemble/openLena-apache-template.xml</descriptor>
                             </descriptors>
                             <tarLongFileMode>gnu</tarLongFileMode>
                             <appendAssemblyId>false</appendAssemblyId>
