@@ -5,9 +5,7 @@ ROOT_PROJECT_PATH=`cd ${SCRIPTPATH}/../.. ; pwd -P`
 LIB_DIR="$ROOT_PROJECT_PATH/target/web-server/lib"
 
 echo "------before-------"
-echo `ls $ROOT_PROJECT_PATH`
-
-ls $LIB_DIR -al
+ls $LIB_DIR -al || true
 
 find "$LIB_DIR" -type l | while read -r symlink; do
 
@@ -25,4 +23,4 @@ find "$LIB_DIR" -type l | while read -r symlink; do
 done
 
 echo "------after-------"
-ls $LIB_DIR -al
+ls $LIB_DIR -al || true
