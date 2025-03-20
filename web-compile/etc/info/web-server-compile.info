@@ -35,6 +35,6 @@ BUILD_PROJECTS="web-engine web-connectors web-cmx web-dist"
 TEMPLATE_NAME=2.4/base
 
 # default os packages
-DEFAULT_OS_PACKAGES_24="openssl-devel apr-util-devel make gcc-c++ rsync pcre-devel zlib-devel lua-devel bison flex automake libtool"
-DEFAULT_OS_PACKAGES_24_UBUNTU="libapr1 libaprutil1 make g++ rsync bison flex automake libtool libpcre3-dev zlib1g-dev liblua5.2-dev libssl-dev libnghttp2-dev"
-DEFAULT_OS_PACKAGES_24_ALPINE="openssl-dev apr-util-dev make g++ rsync pcre-dev zlib-dev lua-dev bison flex automake autoconf libtool bash"
+DEFAULT_OS_PACKAGES_24="openssl-devel apr-util-devel make gcc-c++ rsync pcre-devel zlib-devel lua-devel bison flex automake libtool expat-devel"
+DEFAULT_OS_PACKAGES_24_UBUNTU="libapr1 libaprutil1 make g++ rsync bison flex automake libtool libpcre3-dev zlib1g-dev liblua5.2-dev libssl-dev libnghttp2-dev libexpat1-dev"
+DEFAULT_OS_PACKAGES_24_ALPINE="openssl-dev apr-util-dev make g++ rsync pcre-dev zlib-dev lua-dev bison flex automake autoconf libtool expat-dev bash"
