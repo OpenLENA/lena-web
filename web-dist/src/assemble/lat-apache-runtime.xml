@@ -30,7 +30,7 @@
         <fileSet>
             <directory>../web-dist/outline</directory>
             <includes>
-                <include>modules/lat-web-pe/**</include>
+                <include>modules/web-pe/**</include>
             </includes>
             <excludes>
                 <exclude>**/*.bat</exclude>
@@ -46,7 +46,7 @@
         <fileSet>
             <directory>../web-compile/web-dist/target/web-server</directory>
             <includes>
-                <include>modules/lat-web-pe/**</include>
+                <include>modules/web-pe/**</include>
             </includes>
             <excludes>
                 <exclude>**/*.bat</exclude>

@@ -67,8 +67,8 @@ compile_lat_web_server_all() {
 		#check_exit_code $?
 	fi
 	
-	if [ -f "${OPENLENA_HOME}/modules/openLena-web-pe/modules/mod_cmx.so" ]; then
-		cp -f ${OPENLENA_HOME}/modules/openLena-web-pe/modules/mod_cmx.so ${WEB_ENGINE_TARGET_PATH}/modules
+	if [ -f "${OPENLENA_HOME}/modules/web-pe/modules/mod_cmx.so" ]; then
+		cp -f ${OPENLENA_HOME}/modules/web-pe/modules/mod_cmx.so ${WEB_ENGINE_TARGET_PATH}/modules
 	fi
 }
 

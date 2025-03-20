@@ -86,7 +86,7 @@
                 <exclude>**/.keep</exclude>
             </excludes>
             <fileMode>0755</fileMode>
-            <outputDirectory>./modules/lat-web-pe</outputDirectory>
+            <outputDirectory>./modules/web-pe</outputDirectory>
         </fileSet>
         <!-- end of web template-->
 
@@ -101,7 +101,7 @@
                 <exclude>**/.keep</exclude>
             </excludes>
             <fileMode>0755</fileMode>
-            <outputDirectory>./modules/lat-web-pe/bin</outputDirectory>
+            <outputDirectory>./modules/web-pe/bin</outputDirectory>
         </fileSet>
         <!-- end of web template-->
     </fileSets>
