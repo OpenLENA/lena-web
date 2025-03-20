@@ -263,10 +263,11 @@ compile_web_engine() {
         --enable-lua \
         --enable-sed \
         --enable-usertrack \
-        --enable-shared \
         --enable-mods-shared=most \
         --with-ssl=/usr/include/openssl \
-        --with-included-apr
+        --with-included-apr \
+        --enable-shared \
+        --enable-load-all-modules
 	
 	check_exit_code $?
 	
