@@ -245,7 +245,9 @@ compile_web_engine() {
 		info_emphasized "web-engine source path is not valid."
 		end_fail
 	fi
-	
+
+	echo "why so files are not included?"
+
 	cd ${_source_path}
 
     ./configure \
@@ -267,7 +269,8 @@ compile_web_engine() {
         --with-ssl=/usr/include/openssl \
         --with-included-apr \
         --enable-shared \
-        --enable-load-all-modules
+        --enable-load-all-modules \
+        --enable-static-support
 	
 	check_exit_code $?
 	
