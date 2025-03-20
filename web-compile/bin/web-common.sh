@@ -276,7 +276,9 @@ compile_web_engine() {
       --enable-usertrack \
       --enable-mods-shared=most \
       --with-ssl=/usr/include/openssl \
-      --with-included-apr
+      --with-included-apr \
+      --enable-shared
+
 
 	check_exit_code $?
 
@@ -291,6 +293,35 @@ compile_web_engine() {
 	info_emphasized "make install web-engine..."
 	make install
 	check_exit_code $?
+
+  # Verify that APR and APR-util shared libraries are built
+  info_emphasized "Checking if APR and APR-util were built successfully..."
+
+  # Check if APR shared libraries exist
+  if [ -f "${_source_path}/srclib/apr/.libs/libapr-1.so" ] && [ -f "${_source_path}/srclib/apr/.libs/libapr-1.so.0" ]; then
+      info_emphasized "APR was built successfully."
+  else
+      info_emphasized "APR build failed! Missing libapr-1.so"
+      exit 1
+  fi
+
+  # Check if APR-util shared libraries exist
+  if [ -f "${_source_path}/srclib/apr-util/.libs/libaprutil-1.so" ] && [ -f "${_source_path}/srclib/apr-util/.libs/libaprutil-1.so.0" ]; then
+      info_emphasized "APR-util was built successfully."
+  else
+      info_emphasized "APR-util build failed! Missing libaprutil-1.so"
+      exit 1
+  fi
+
+  info_emphasized "Copying APR and APR-util shared libraries..."
+
+  # Copy APR shared libraries
+  cp "${_source_path}/srclib/apr/.libs/libapr-1.so"* "${_target_path}/lib/"
+
+  # Copy APR-util shared libraries
+  cp "${_source_path}/srclib/apr-util/.libs/libaprutil-1.so"* "${_target_path}/lib/"
+
+  info_emphasized "Web-engine compilation completed successfully."
 }
 
 compile_web_connectors() {
