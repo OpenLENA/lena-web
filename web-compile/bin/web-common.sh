@@ -182,7 +182,6 @@ compile_apache_server() {
 	  --prefix=${_target_path} \
 	  --enable-modules=all \
 	  --enable-mods-shared=most \
-	  --enable-shared \
 	  --with-mpm=worker \
 	  --enable-proxy \
 	  --enable-proxy-http \
@@ -264,6 +263,7 @@ compile_web_engine() {
         --enable-lua \
         --enable-sed \
         --enable-usertrack \
+        --enable-shared \
         --enable-mods-shared=most \
         --with-ssl=/usr/include/openssl \
         --with-included-apr
