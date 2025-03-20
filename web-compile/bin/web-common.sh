@@ -21,10 +21,15 @@ SCRIPTPATH=`cd $(dirname $0) ; pwd -P`
 
 ROOT_PROJECT_PATH=${1}
 
-echo "check shell param: ${ROOT_PROJECT_PATH}"
-echo "$(ls -l /)"
+echo "ROOT_PROJECT_PATH: ${ROOT_PROJECT_PATH}"
 
-. ${ROOT_PROJECT_PATH}/web-compile/etc/info/web-server-compile.info
+if [ -z "${ROOT_PROJECT_PATH}" ]; then
+    # ROOT_PROJECT_PATH가 비어 있으면 현재 디렉토리에서 상대 경로로 실행
+    . ./web-compile/etc/info/web-server-compile.info
+else
+    # ROOT_PROJECT_PATH가 설정되어 있으면 절대 경로로 실행
+    . ${ROOT_PROJECT_PATH}/web-compile/etc/info/web-server-compile.info
+fi
 
 IS_DEBUG_ENABLED="false"
 
@@ -255,26 +260,23 @@ compile_web_engine() {
 	cd ${_source_path}
 
     ./configure \
-        --prefix=${_target_path} \
-        --enable-modules=all \
-        --enable-proxy \
-        --enable-proxy-http \
-        --enable-proxy-connect \
-        --enable-cache \
-        --enable-disk-cache \
-        --enable-deflate \
-        --enable-ssl \
-        --enable-mpms-shared=all \
-        --enable-nonportable-atomics=yes \
-        --enable-lua \
-        --enable-sed \
-        --enable-usertrack \
-        --enable-mods-shared=most \
-        --with-ssl=/usr/include/openssl \
-        --with-included-apr \
-        --enable-shared \
-        --enable-load-all-modules \
-        --enable-static-support
+      --prefix=${_target_path} \
+      --enable-modules=all \
+      --enable-proxy \
+      --enable-proxy-http \
+      --enable-proxy-connect \
+      --enable-cache \
+      --enable-disk-cache \
+      --enable-deflate \
+      --enable-ssl \
+      --enable-mpms-shared=all \
+      --enable-nonportable-atomics=yes \
+      --enable-lua \
+      --enable-sed \
+      --enable-usertrack \
+      --enable-mods-shared=most \
+      --with-ssl=/usr/include/openssl \
+      --with-included-apr
 
 	check_exit_code $?
 
