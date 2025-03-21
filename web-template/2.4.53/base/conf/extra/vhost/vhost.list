@@ -1,0 +1,1 @@
+IncludeOptional ${INSTALL_PATH}/conf/extra/vhost/vhost_default.conf

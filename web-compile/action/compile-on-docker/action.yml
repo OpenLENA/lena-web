@@ -1,0 +1,6 @@
+# /action.yml
+name: 'Compile apache'
+description: 'add actions'
+runs:
+  using: 'docker'
+  image: Dockerfile

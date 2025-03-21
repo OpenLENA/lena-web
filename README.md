@@ -1,16 +1,16 @@
 
 
-# <img src="docs/images/readme_lena_web_head.png" width="800">  
+# <img src="docs/images/lat_logo.png" width="200">  
 [![Build Artifact & Container](https://github.com/OpenLENA/lena-web/actions/workflows/push_build.yml/badge.svg)](https://github.com/OpenLENA/lena-web/actions/workflows/push_build.yml)
 
 
-This is the home of the LENA Web Server.
+This is the home of the OpenLENA Web Server.
 A portable installation file including centos7,8 and amazon linux is provied based on Apache httpd.
-LENA Web server also provides everything required for creating and configuring Web Server so easily.
+OpenLENA Web server also provides everything required for creating and configuring Web Server so easily.
 
 All feature following will be working with CLI.
 
-The feature of LENA Web server Open Edition : 
+The feature of OpenLENA Web server Open Edition : 
 
 + Installation : Create, Delete and Clone server. Don't need to type in much things when create server, just required server name and service port.
   Clone server is so useful when you wanna save the status of the server right away.
@@ -24,7 +24,7 @@ The feature of LENA Web server Open Edition :
 You can get [installation guide](https://github.com/OpenLENA/lena-web/wiki/Installation-Guide) and getting started.
 
 ## Getting Help
-If you are having some trouble with LENA? Contact us the way you want.
+If you are having some trouble with OpenLENA? Contact us the way you want.
 + Check the reference documentation.
 + Notify the problem with creating issue.
 + Feel free to join our community and ask that to us.
@@ -40,7 +40,7 @@ We use GitHub's integrated issue tracking system to record bugs and other issues
 #### web-oss
 Manage open sources required for httpd compile such as httpd, apr, pcre, and tomcat-connectors.
 #### web-core
-Manage modules added/modified in LENA.
+Manage modules added/modified in OpenLENA.
 #### web-template
 Manages the configuration file included by default when creating a portable installation file.
 #### web-compile 

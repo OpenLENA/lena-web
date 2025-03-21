@@ -2,11 +2,11 @@
 <release>
 	<date>${build.timestamp}</date>
 	<version>${project.version}</version>
-	<type>lena</type>
+	<type>OpenLENA</type>
 	<depot>
 		<modules>
 			<module>
-				<id>lena-web</id>
+				<id>apache</id>
 				<version>${project.version}</version>
 			</module>
 		</modules>

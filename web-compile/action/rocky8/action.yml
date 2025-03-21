@@ -1,6 +1,0 @@
-# /action.yml
-name: 'Compile apache - Rocky 8'
-description: 'add actions'
-runs:
-  using: 'docker'
-  image: Dockerfile
